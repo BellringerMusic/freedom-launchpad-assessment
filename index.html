@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder Freedom Assessment — The Freedom Launchpad</title>
+<meta name="description" content="Discover your Founder Coherence Index™ in under 10 minutes. A dual diagnostic measuring your internal operating system and external business alignment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   CSS VARIABLES — BRAND IDENTITY SYSTEM
+   ======================================== */
+:root {
+  --color-navy: #1A2744;
+  --color-gold: #C9943E;
+  --color-white: #FFFFFF;
+  --color-slate: #4A5568;
+  --color-mist: #F7F8FA;
+  --color-soft-gold: #F5E6C8;
+  --color-green: #2D9C6F;
+  --color-coral: #E85D4A;
+  --fci-coherent: #1B7A4A;
+  --fci-aligned: #2D9C6F;
+  --fci-emerging: #C9943E;
+  --fci-misaligned: #D4762C;
+  --fci-fractured: #C94A3E;
+  --fci-critical: #A82D2D;
+  --bg-dark: #1A2744;
+  --bg-darker: #111B2E;
+  --bg-light: #F7F8FA;
+  --bg-warm: #F5E6C8;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  --shadow-card: 0 4px 20px rgba(26, 39, 68, 0.08);
+  --shadow-card-elevated: 0 8px 30px rgba(26, 39, 68, 0.12);
+  --shadow-card-gold: 0 8px 30px rgba(201, 148, 62, 0.2);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--color-slate);
+  background: var(--color-white);
+  overflow-x: hidden;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+h1, h2, h3 { font-family: var(--font-display); color: var(--color-navy); }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 700; line-height: 1.2; }
+h3 { font-family: var(--font-body); font-size: 1.375rem; font-weight: 600; line-height: 1.4; }
+
+/* ========================================
+   LAYOUT CONTAINERS
+   ======================================== */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ========================================
+   SCREEN: LANDING / HERO
+   ======================================== */
+#screen-landing {
+  min-height: 100vh;
+  background: linear-gradient(170deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+#screen-landing::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 148, 62, 0.08);
+  pointer-events: none;
+}
+
+#screen-landing::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 148, 62, 0.06);
+  pointer-events: none;
+}
+
+.brand-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  color: var(--color-white);
+  max-width: 700px;
+  margin-bottom: 16px;
+}
+
+.hero-title .gold { color: var(--color-gold); }
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto 12px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-gold);
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  opacity: 0.8;
+}
+
+.hero-features {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+}
+
+.hero-feature .icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-gold);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 16px 40px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+  background: #B5842F;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-gold);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.hero-footer {
+  margin-top: 40px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-footer-item {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dual-circles {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dual-circles .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.dual-circles .circle-gold {
+  border-color: var(--color-gold);
+  margin-right: -12px;
+  z-index: 1;
+}
+
+.dual-circles .circle-navy {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ========================================
+   SCREEN: EMAIL CAPTURE
+   ======================================== */
+#screen-email {
+  min-height: 100vh;
+  background: var(--color-white);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 24px;
+}
+
+.email-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card-elevated);
+  padding: 48px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.email-card h2 { margin-bottom: 12px; }
+
+.email-card p {
+  color: var(--color-slate);
+  margin-bottom: 32px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-navy);
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus { border-color: var(--color-gold); }
+
+.form-group input::placeholder { color: #A0AEC0; }
+
+.btn-primary.full-width {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.email-privacy {
+  font-size: 0.75rem;
+  color: #A0AEC0;
+  margin-top: 16px;
+}
+
+/* ========================================
+   SCREEN: ASSESSMENT
+   ======================================== */
+#screen-assessment {
+  min-height: 100vh;
+  background: var(--bg-light);
+  display: none;
+  flex-direction: column;
+}
+
+.assessment-header {
+  background: var(--color-navy);
+  padding: 20px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.assessment-header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.assessment-brand {
+  font-family: var(--font-display);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.assessment-brand .gold { color: var(--color-gold); }
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  letter-spacing: 1px;
+}
+
+.progress-bar-container {
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-gold);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+.assessment-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 24px 60px;
+}
+
+.track-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.dimension-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  text-align: center;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.question-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card-elevated);
+  padding: 40px 36px;
+  max-width: 740px;
+  margin: 0 auto;
+  width: 100%;
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.question-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.question-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.45;
+  margin-bottom: 28px;
+}
+
+.answer-options { display: flex; flex-direction: column; gap: 10px; }
+
+.answer-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  background: var(--color-white);
+}
+
+.answer-option:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 148, 62, 0.03);
+}
+
+.answer-option.selected {
+  border-color: var(--color-gold);
+  background: rgba(201, 148, 62, 0.06);
+}
+
+.answer-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #A0AEC0;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  margin-top: 1px;
+}
+
+.answer-option:hover .answer-letter {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.answer-option.selected .answer-letter {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-white);
+}
+
+.answer-text {
+  font-size: 0.925rem;
+  line-height: 1.6;
+  color: var(--color-slate);
+}
+
+/* Acknowledgment */
+.acknowledgment {
+  text-align: center;
+  padding: 32px;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeInUp 0.3s ease;
+}
+
+.acknowledgment p {
+  font-size: 1rem;
+  color: var(--color-navy);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* Track Transition */
+.track-transition {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  animation: fadeInUp 0.4s ease;
+}
+
+.track-transition h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-navy);
+  margin-bottom: 12px;
+}
+
+.track-transition .checkpoint-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: rgba(201, 148, 62, 0.1);
+  padding: 8px 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.track-transition p {
+  color: var(--color-slate);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* ========================================
+   SCREEN: CALCULATING
+   ======================================== */
+#screen-calculating {
+  min-height: 100vh;
+  background: var(--color-navy);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.calc-animation {
+  margin-bottom: 40px;
+}
+
+.calc-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid rgba(201, 148, 62, 0.15);
+  border-top-color: var(--color-gold);
+  animation: spin 1.2s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.calc-steps {
+  list-style: none;
+  margin-top: 32px;
+}
+
+.calc-step {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 12px;
+  transition: all 0.5s ease;
+  letter-spacing: 0.5px;
+}
+
+.calc-step.active { color: var(--color-gold); }
+.calc-step.done { color: rgba(255, 255, 255, 0.6); }
+
+/* ========================================
+   SCREEN: RESULTS
+   ======================================== */
+#screen-results {
+  display: none;
+  background: var(--color-white);
+}
+
+.results-hero {
+  background: linear-gradient(170deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.results-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+}
+
+.fci-score-display {
+  font-family: var(--font-mono);
+  font-size: clamp(4rem, 10vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.fci-label-text {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.fci-interpretation {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* FCI Gauge */
+.fci-gauge {
+  width: 260px;
+  height: 140px;
+  margin: 0 auto 24px;
+  position: relative;
+}
+
+/* Results Sections */
+.results-section {
+  padding: 60px 24px;
+}
+
+.results-section:nth-child(even) { background: var(--bg-light); }
+
+.results-section h2 {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.results-section .section-subtitle {
+  text-align: center;
+  color: var(--color-slate);
+  margin-bottom: 40px;
+  font-size: 1rem;
+}
+
+/* Dual OS Snapshot */
+.dual-os-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .dual-os-grid { grid-template-columns: 1fr; }
+}
+
+.os-panel {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+}
+
+.os-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.os-panel-title {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-navy);
+}
+
+.os-panel-score {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-gold);
+}
+
+.dimension-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.dimension-row:last-child { border-bottom: none; }
+
+.dim-name {
+  font-size: 0.875rem;
+  color: var(--color-navy);
+  font-weight: 500;
+}
+
+.dim-score-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dim-bar {
+  width: 80px;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.dim-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+.dim-score-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-slate);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* Gap Pattern */
+.gap-pattern-card {
+  background: var(--color-navy);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gap-pattern-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  margin-bottom: 16px;
+}
+
+.gap-pattern-desc {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Bottleneck */
+.bottleneck-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--color-coral);
+  padding: 36px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.bottleneck-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232, 93, 74, 0.08);
+  color: var(--color-coral);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.bottleneck-dim-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+}
+
+.bottleneck-score {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  color: var(--color-coral);
+  margin-bottom: 16px;
+}
+
+.bottleneck-desc {
+  color: var(--color-slate);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Cross Patterns */
+.cross-patterns-grid {
+  display: grid;
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cross-pattern-alert {
+  background: var(--bg-warm);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.cross-alert-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.cross-alert-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+.cross-alert-desc {
+  font-size: 0.875rem;
+  color: var(--color-slate);
+  line-height: 1.6;
+}
+
+/* Freedom Key */
+.freedom-key-section {
+  background: var(--bg-warm);
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.freedom-key-card {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.freedom-key-card h2 {
+  margin-bottom: 20px;
+}
+
+.freedom-key-card > p {
+  color: var(--color-slate);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.tfw-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 540px) {
+  .tfw-grid { grid-template-columns: 1fr; }
+}
+
+.tfw-item {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.tfw-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.tfw-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+}
+
+.tfw-prompt {
+  font-size: 0.9rem;
+  color: var(--color-navy);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.freedom-key-attribution {
+  font-size: 0.85rem;
+  color: var(--color-slate);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* What This Preview Doesn't Show */
+.preview-limits {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.preview-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+@media (max-width: 540px) {
+  .preview-compare { grid-template-columns: 1fr; }
+}
+
+.compare-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  border: 1px solid #E2E8F0;
+}
+
+.compare-card h4 {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 4px;
+}
+
+.compare-card .by-line {
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+
+.compare-card p {
+  font-size: 0.85rem;
+  color: var(--color-slate);
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(170deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.cta-section h2 {
+  color: var(--color-white);
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 550px;
+  margin: 0 auto 32px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.cta-details {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.cta-detail {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cta-detail .check {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+}
+
+.btn-cta-large {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-gold);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 18px 48px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.btn-cta-large:hover {
+  background: #B5842F;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-gold);
+}
+
+/* Footer */
+.results-footer {
+  background: var(--bg-darker);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.results-footer p {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.6;
+}
+
+.results-footer .gold { color: var(--color-gold); }
+
+/* JSON Export Button */
+.export-row {
+  text-align: center;
+  padding: 20px;
+  background: var(--bg-light);
+}
+
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--color-slate);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 10px 20px;
+  border: 1px solid #CBD5E0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.btn-export:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 640px) {
+  .question-card { padding: 28px 20px; }
+  .answer-text { font-size: 0.85rem; }
+  .email-card { padding: 32px 20px; }
+  .gap-pattern-card { padding: 28px 20px; }
+  .bottleneck-card { padding: 28px 20px; }
+  .os-panel { padding: 20px; }
+  .dim-bar { width: 50px; }
+  .hero-features { flex-direction: column; align-items: center; gap: 12px; }
+  .results-hero { padding: 60px 20px; }
+  .results-section { padding: 40px 20px; }
+  .cta-section { padding: 60px 20px; }
+}
+
+/* ========================================
+   UTILITY
+   ======================================== */
+.hidden { display: none !important; }
+.fade-in { animation: fadeInUp 0.4s ease; }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     SCREEN 1: LANDING / HERO
+     ============================================ -->
+<div id="screen-landing">
+  <div class="dual-circles">
+    <div class="circle circle-gold"></div>
+    <div class="circle circle-navy"></div>
+  </div>
+  <div class="brand-label">The Freedom Launchpad</div>
+  <h1 class="hero-title">
+    Discover Your<br><span class="gold">Founder Coherence Index&trade;</span>
+  </h1>
+  <p class="hero-subtitle">
+    The single number that reveals whether your growth is sustainable or heading for a crash.
+  </p>
+  <p class="hero-tagline">20 questions &middot; Under 10 minutes &middot; Uncomfortably accurate</p>
+
+  <div class="hero-features">
+    <div class="hero-feature"><div class="icon">&#10003;</div> Internal OS diagnostic</div>
+    <div class="hero-feature"><div class="icon">&#10003;</div> Business alignment scan</div>
+    <div class="hero-feature"><div class="icon">&#10003;</div> Pattern detection</div>
+  </div>
+
+  <button class="btn-primary" onclick="showEmailScreen()">
+    Start Your Assessment &rarr;
+  </button>
+
+  <div class="hero-footer">
+    <div class="hero-footer-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      100% confidential
+    </div>
+    <div class="hero-footer-item">
+      Designed by Mark Rampolla &amp; Marcus Bell
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     SCREEN 2: EMAIL CAPTURE
+     ============================================ -->
+<div id="screen-email">
+  <div class="email-card">
+    <h2>Before We Begin</h2>
+    <p>Your results will include your personal Founder Coherence Index&trade; report. Enter your details so we can send you a copy.</p>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" id="input-name" placeholder="Your first name" autocomplete="given-name">
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="input-email" placeholder="you@company.com" autocomplete="email">
+    </div>
+    <button class="btn-primary full-width" onclick="startAssessment()">
+      Begin Assessment &rarr;
+    </button>
+    <p class="email-privacy">Your data stays between us. No spam, no selling. We take privacy seriously.</p>
+  </div>
+</div>
+
+<!-- ============================================
+     SCREEN 3: ASSESSMENT
+     ============================================ -->
+<div id="screen-assessment">
+  <div class="assessment-header">
+    <div class="assessment-header-inner">
+      <div class="assessment-brand">THE <span class="gold">FREEDOM</span> LAUNCHPAD</div>
+      <div class="progress-info">
+        <div class="progress-text" id="progress-text">Q1 / 20</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="assessment-body" id="assessment-body">
+    <!-- Questions rendered dynamically -->
+  </div>
+</div>
+
+<!-- ============================================
+     SCREEN 4: CALCULATING
+     ============================================ -->
+<div id="screen-calculating">
+  <div class="calc-animation">
+    <div class="calc-ring"></div>
+  </div>
+  <h2 style="color: var(--color-white); margin-bottom: 8px;">Calculating Your FCI</h2>
+  <p style="color: rgba(255,255,255,0.5); margin-bottom: 32px; font-size: 0.9rem;">Processing your dual diagnostic...</p>
+  <ul class="calc-steps">
+    <li class="calc-step" id="calc-step-1">Scoring Freedom dimensions...</li>
+    <li class="calc-step" id="calc-step-2">Scoring Alignment dimensions...</li>
+    <li class="calc-step" id="calc-step-3">Computing Founder Coherence Index...</li>
+    <li class="calc-step" id="calc-step-4">Detecting patterns and bottlenecks...</li>
+    <li class="calc-step" id="calc-step-5">Generating your report...</li>
+  </ul>
+</div>
+
+<!-- ============================================
+     SCREEN 5: RESULTS
+     ============================================ -->
+<div id="screen-results">
+  <!-- Populated by JS -->
+</div>
+
+<!-- ============================================
+     JAVASCRIPT ENGINE
+     ============================================ -->
+<script>
+// =============================================
+// ASSESSMENT DATA — ALL 20 QUESTIONS
+// =============================================
+const QUESTIONS = [
+  // TRACK A: FREEDOM SCORE PREVIEW (Q1-Q10)
+  {
+    id: 1,
+    track: 'A',
+    dimension: 'Pressure Response',
+    text: 'A significant deal falls through on Friday afternoon. What do the next 3 hours actually look like for you — not what you\'d tell someone, but what actually happens?',
+    options: [
+      { letter: 'A', score: 5, text: 'I feel the hit, name it, process it in real-time. I\'m transparent with my team about the disappointment without spiraling. By dinner, I\'ve extracted the lesson and I\'m present with my partner.' },
+      { letter: 'B', score: 4, text: 'I hold it together at work, process it on the drive home, and have an honest conversation with my partner. I might lose an hour to frustration but I bounce back by the next morning.' },
+      { letter: 'C', score: 3, text: 'I go into execution mode at work \u2014 immediately start solving. My team thinks I\'m fine. At home, I\'m distracted and irritable but I don\'t connect it to the deal until later.' },
+      { letter: 'D', score: 2, text: 'I spiral internally while performing calm externally. I replay what went wrong obsessively. My partner can tell something\'s off but I say "I\'m fine." Sleep is rough.' },
+      { letter: 'E', score: 1, text: 'It wrecks my weekend. I catastrophize, question everything, maybe snap at people who don\'t deserve it. The emotional hangover lasts days, not hours.' }
+    ]
+  },
+  {
+    id: 2,
+    track: 'A',
+    dimension: 'Pressure Response',
+    text: 'If your nervous system had a dashboard showing your default state on a normal Tuesday, what would it honestly read?',
+    options: [
+      { letter: 'A', score: 5, text: 'CALM & CREATIVE \u2014 My baseline is regulated. I activate when needed and return to center quickly. I built this through intentional practice.' },
+      { letter: 'B', score: 4, text: 'MOSTLY CALM \u2014 Good days outnumber stressed days. I\'m not unshakeable but I\'m stable. External events still move the needle but not dramatically.' },
+      { letter: 'C', score: 3, text: 'WEATHER-DEPENDENT \u2014 My state tends to track my circumstances. Good news lifts me, bad news drops me. I\'m responsive rather than regulated, and I\'m aware of it.' },
+      { letter: 'D', score: 2, text: 'CHRONIC ALERT \u2014 Always scanning for what could go wrong. It looks like productivity and preparedness but underneath it\'s low-grade anxiety that never fully turns off.' },
+      { letter: 'E', score: 1, text: 'SURVIVAL MODE \u2014 I know I\'m running on fight-or-flight. I\'ve tried to change it but my system keeps returning to this baseline no matter what I do.' }
+    ]
+  },
+  {
+    id: 3,
+    track: 'A',
+    dimension: 'Integrity Alignment',
+    text: 'Look at how you spent last week \u2014 every meeting, task, and decision. What percentage of your time was spent on things that genuinely align with your stated values?',
+    options: [
+      { letter: 'A', score: 5, text: '80%+ \u2014 I\'ve architected my weeks around my values. Misaligned obligations have been systematically eliminated. My calendar IS my values in action.' },
+      { letter: 'B', score: 4, text: '60-80% \u2014 Most of my time aligns, but there\'s a persistent 20-30% I can\'t seem to shake. Legacy commitments, obligations I haven\'t renegotiated.' },
+      { letter: 'C', score: 3, text: '40-60% \u2014 Roughly half. I know what matters but the urgent keeps overriding the important. I have a vision board and a calendar that don\'t match.' },
+      { letter: 'D', score: 2, text: '20-40% \u2014 Most of my week is spent on things I "have to" do, not things I want to do. My vision feels aspirational \u2014 something for later, not now.' },
+      { letter: 'E', score: 1, text: 'Under 20% \u2014 I honestly can\'t tell you my values right now. I\'m in react mode. The vision I had when I started this business has been buried under operations.' }
+    ]
+  },
+  {
+    id: 4,
+    track: 'A',
+    dimension: 'Integrity Alignment',
+    text: 'When you describe your 5-year vision to someone, and then look at what you actually did today \u2014 how big is the gap between the two?',
+    options: [
+      { letter: 'A', score: 5, text: 'Small. Today was a direct step toward the vision. I can draw a clear line from this morning\'s actions to the 5-year destination.' },
+      { letter: 'B', score: 4, text: 'Moderate. Today had elements of the vision mixed with necessary maintenance. I\'m generally on-track even if today wasn\'t perfectly aligned.' },
+      { letter: 'C', score: 3, text: 'Noticeable. I can articulate the vision clearly but today looked nothing like it. There\'s a planning-execution gap I haven\'t closed.' },
+      { letter: 'D', score: 2, text: 'Large. My vision and my daily reality feel like two different businesses. I\'m not sure how to bridge the gap without blowing everything up.' },
+      { letter: 'E', score: 1, text: 'I\'ve stopped thinking about the vision. It feels naive compared to what I\'m actually dealing with. Survival has replaced strategy.' }
+    ]
+  },
+  {
+    id: 5,
+    track: 'A',
+    dimension: 'Operational Clarity',
+    text: 'Think about the last 3 major decisions you made in your business. How long did each one take from "I need to decide this" to "decided"?',
+    options: [
+      { letter: 'A', score: 5, text: 'Hours to 1 day. I gather inputs, trust my judgment, decide, and move. I\'ve learned that speed of decision is a competitive advantage and I rarely regret my choices.' },
+      { letter: 'B', score: 4, text: '1-3 days. I like to sleep on major decisions but I don\'t agonize. I have a decision-making process that I trust. Occasional regret but mostly confident.' },
+      { letter: 'C', score: 3, text: '1-2 weeks. I tend to over-research, seek too many opinions, or wait for certainty that never arrives. I know I could be faster but I\'m afraid of making the wrong call.' },
+      { letter: 'D', score: 2, text: 'Weeks to months. I sit on decisions until external pressure forces them. I often realize I "decided by not deciding" and the window closed.' },
+      { letter: 'E', score: 1, text: 'I avoid decisions entirely. I delegate them, postpone them, or let circumstances decide for me. The backlog of unmade decisions is a source of constant low-grade stress.' }
+    ]
+  },
+  {
+    id: 6,
+    track: 'A',
+    dimension: 'Operational Clarity',
+    text: 'Map your typical week: what percentage of your time is spent on activities that give you energy versus activities that drain you?',
+    options: [
+      { letter: 'A', score: 5, text: '80%+ energizing. I\'ve systematically deleted, delegated, or redesigned the draining parts. My week is architected for sustainable high performance.' },
+      { letter: 'B', score: 4, text: '60-80% energizing. Most of my time is well-spent but there\'s a persistent energy drain I haven\'t addressed \u2014 usually administrative, operational, or a relationship I\'m tolerating.' },
+      { letter: 'C', score: 3, text: 'Roughly 50/50. The energizing parts are what keep me going, but the draining parts are accumulating and I\'m starting to feel it.' },
+      { letter: 'D', score: 2, text: 'Mostly draining. I\'m running on caffeine, willpower, and obligation. The parts I love have shrunk to a small fraction of my actual week.' },
+      { letter: 'E', score: 1, text: 'I can\'t tell anymore. I\'ve been in grind mode so long that I\'ve lost touch with what energizes me. Everything feels like work.' }
+    ]
+  },
+  {
+    id: 7,
+    track: 'A',
+    dimension: 'Relational Power',
+    text: 'Think about the 5 people closest to you \u2014 professionally and personally. Can they tell you hard truths without you punishing them for it?',
+    options: [
+      { letter: 'A', score: 5, text: 'Yes. I\'ve built a circle where honesty is the norm. I actively reward people for challenging me and they know it\'s safe. Several have done it this month.' },
+      { letter: 'B', score: 4, text: 'Mostly. 3-4 of them can be fully honest. The others hold back on certain topics because they\'re not sure how I\'ll react.' },
+      { letter: 'C', score: 3, text: 'Maybe 1-2. Most people in my life edit themselves around me. I suspect there are things my team, partner, or friends aren\'t saying.' },
+      { letter: 'D', score: 2, text: 'I\'m not sure anyone can. I\'ve created an environment where people agree with me because disagreement has consequences \u2014 even if those consequences are subtle.' },
+      { letter: 'E', score: 1, text: 'I\'m isolated. The people around me are transactional, not truthful. I don\'t have anyone who sees the real picture and is willing to say it.' }
+    ]
+  },
+  {
+    id: 8,
+    track: 'A',
+    dimension: 'Relational Power',
+    text: 'When your team is under pressure \u2014 a deadline, a crisis, a high-stakes decision \u2014 what effect does YOUR presence have on the room?',
+    options: [
+      { letter: 'A', score: 5, text: 'I\'m the calm center. People regulate around me. I\'ve trained myself to lower the temperature and create space for clear thinking, even when I\'m stressed.' },
+      { letter: 'B', score: 4, text: 'I\'m generally stabilizing. My team looks to me for steadiness and I usually deliver. Occasionally my own stress leaks through but I course-correct quickly.' },
+      { letter: 'C', score: 3, text: 'It depends on the day. Sometimes I\'m the steady hand. Other times I\'m the one adding pressure without meaning to. My team has learned to read my mood.' },
+      { letter: 'D', score: 2, text: 'I probably add to the pressure. I get more demanding, more critical, or more micromanaging when stakes are high. I know this about myself but I can\'t stop it in the moment.' },
+      { letter: 'E', score: 1, text: 'I avoid high-pressure situations with my team. I either delegate the crisis or disappear until it resolves. My absence IS my pressure response.' }
+    ]
+  },
+  {
+    id: 9,
+    track: 'A',
+    dimension: 'Self-Knowledge',
+    text: 'If your business failed tomorrow \u2014 completely, publicly, irreversibly \u2014 how much of your identity survives?',
+    options: [
+      { letter: 'A', score: 5, text: 'Most of it. My business is something I do, not something I am. I\'ve built a sense of self that exists independent of my professional success. I\'d grieve the loss but I wouldn\'t lose myself.' },
+      { letter: 'B', score: 4, text: 'A significant portion. I know intellectually that I\'m more than my business but I haven\'t fully tested that belief. It would shake me deeply but I\'d find my footing.' },
+      { letter: 'C', score: 3, text: 'I\'m honestly not sure. My business and my identity have been fused for so long that I don\'t know where one ends and the other begins. The thought of losing it triggers real fear.' },
+      { letter: 'D', score: 2, text: 'Very little. I\'ve built my entire identity around being a founder, a builder, a success. Without the business, I don\'t know who I am or what I\'m worth.' },
+      { letter: 'E', score: 1, text: 'I can\'t even engage with this question. The idea of failure is so threatening that my brain refuses to go there. Which probably tells me something important.' }
+    ]
+  },
+  {
+    id: 10,
+    track: 'A',
+    dimension: 'Self-Knowledge',
+    text: 'What\'s the pattern you KNOW you repeat \u2014 in business, relationships, or life \u2014 even though you can see it happening?',
+    options: [
+      { letter: 'A', score: 5, text: 'I can name my top 3 patterns and I\'m actively working on them. I\'ve built systems and relationships that catch me when I slip. Self-awareness is a practice, not a destination.' },
+      { letter: 'B', score: 4, text: 'I can see 1-2 patterns clearly. I\'m working on them but they still catch me sometimes. Progress is real but I\'m not where I want to be yet.' },
+      { letter: 'C', score: 3, text: 'I can see the pattern AFTER it plays out but I can\'t seem to catch it in real-time. I have insight without interception \u2014 I understand it but I can\'t stop it.' },
+      { letter: 'D', score: 2, text: 'Other people have pointed out my patterns but I resist hearing it. I intellectually know they might be right but I find ways to explain why "this time is different."' },
+      { letter: 'E', score: 1, text: 'I don\'t think I have one. Or if I do, I genuinely can\'t see it. Which, based on everything I know, probably means it\'s running the show.' }
+    ]
+  },
+  // TRACK B: ALIGNMENT SCORE PREVIEW (Q11-Q20)
+  {
+    id: 11,
+    track: 'B',
+    dimension: 'Money Truth',
+    text: 'What\'s your honest relationship with your pricing? Not your logic about it \u2014 your FEELING about it when you\'re about to quote a number to a potential client or customer.',
+    options: [
+      { letter: 'A', score: 5, text: 'Confident and grounded. My pricing reflects my value and I state it without flinching. I\'ve done the work to know my worth and the market confirms it.' },
+      { letter: 'B', score: 4, text: 'Mostly confident with occasional doubt. I can hold my price in most situations but certain buyers or competitors trigger insecurity. I\'ve raised prices recently and it\'s mostly working.' },
+      { letter: 'C', score: 3, text: 'I know I should charge more but I keep finding reasons not to. I discount before being asked, offer extras to justify the price, or avoid pricing conversations altogether.' },
+      { letter: 'D', score: 2, text: 'My pricing is a mess. I charge different people different things based on what I think they can afford. There\'s no consistent logic \u2014 just negotiation and accommodation.' },
+      { letter: 'E', score: 1, text: 'I feel sick when money comes up. I\'ve priced myself out of profitability because asking for money triggers something deep \u2014 guilt, shame, fear of rejection. I know it\'s irrational but I can\'t seem to fix it.' }
+    ]
+  },
+  {
+    id: 12,
+    track: 'B',
+    dimension: 'Money Truth',
+    text: 'Ignore your best month and worst month from the last year. What do the remaining months tell you about the actual health of your business?',
+    options: [
+      { letter: 'A', score: 5, text: 'Consistently growing. The middle months show a clear upward trajectory with manageable variance. My revenue engine is predictable and I can forecast with confidence.' },
+      { letter: 'B', score: 4, text: 'Stable with growth edges. The middle months are consistent but flat. I\'ve built a floor but haven\'t cracked the ceiling. Revenue is reliable but not accelerating.' },
+      { letter: 'C', score: 3, text: 'Volatile but surviving. The middle months swing enough that I can\'t predict next quarter. Feast-or-famine cycles that I\'ve gotten used to but shouldn\'t have to tolerate.' },
+      { letter: 'D', score: 2, text: 'Declining or stagnant. When I remove the outliers, the trend is flat or down. I\'ve been masking it with occasional wins but the base business is weakening.' },
+      { letter: 'E', score: 1, text: 'I don\'t know. I don\'t track monthly revenue closely enough to answer this question. My financials are disorganized or I avoid looking at them.' }
+    ]
+  },
+  {
+    id: 13,
+    track: 'B',
+    dimension: 'Shipping Velocity',
+    text: 'How many significant projects, products, or initiatives have you COMPLETED and SHIPPED in the last 90 days?',
+    options: [
+      { letter: 'A', score: 5, text: '3+ completed and shipped. I\'ve built a rhythm of consistent output. My execution system produces finished work more often than not.' },
+      { letter: 'B', score: 4, text: '2 completed. I\'m producing but not at the velocity I want. Each one takes longer than it should because I get caught in refinement loops or distractions.' },
+      { letter: 'C', score: 3, text: '1 completed. I started several but only finished one. The gap between starting and finishing is my biggest operational bottleneck.' },
+      { letter: 'D', score: 2, text: '0 completed but several in progress. I\'m a prolific starter with a completion problem. My graveyard of 80%-done projects is growing.' },
+      { letter: 'E', score: 1, text: 'I can\'t point to a single completed initiative in 90 days. I\'m either paralyzed, overwhelmed, or so reactive that proactive execution has stopped.' }
+    ]
+  },
+  {
+    id: 14,
+    track: 'B',
+    dimension: 'Shipping Velocity',
+    text: 'Think about your to-do list or project board. What percentage of items have been sitting there for more than 30 days?',
+    options: [
+      { letter: 'A', score: 5, text: 'Under 10%. My system processes tasks efficiently. Things that linger get delegated, deleted, or scheduled. My list reflects what\'s actually happening this week.' },
+      { letter: 'B', score: 4, text: '10-25%. Most things move through but there\'s a persistent backlog of items I keep pushing forward without deciding. It\'s manageable but growing.' },
+      { letter: 'C', score: 3, text: '25-50%. About a quarter to half of my list is stale. I look at it and feel overwhelmed, which makes me less likely to engage with it, which makes it worse.' },
+      { letter: 'D', score: 2, text: '50-75%. More than half my list is old. I\'ve started avoiding the list entirely and working from memory or reactivity. The system has broken down.' },
+      { letter: 'E', score: 1, text: 'I\'ve abandoned my task system. It became a source of shame rather than clarity. I\'m operating from inbox, memory, and whatever\'s on fire today.' }
+    ]
+  },
+  {
+    id: 15,
+    track: 'B',
+    dimension: 'Leverage Architecture',
+    text: 'If you disappeared from your business for 30 days \u2014 no calls, no emails, no Slack \u2014 what would happen?',
+    options: [
+      { letter: 'A', score: 5, text: 'It would run smoothly. My team knows their roles, has decision-making authority, and would handle most situations without me for most of those 30 days. I\'ve built this intentionally.' },
+      { letter: 'B', score: 4, text: 'It would mostly function. The core operations would continue but strategic decisions would pause. A few fires would go unhandled but nothing catastrophic.' },
+      { letter: 'C', score: 3, text: 'It would slow down significantly. My team can execute on existing projects but can\'t initiate, sell, or problem-solve at the level needed. Revenue would dip.' },
+      { letter: 'D', score: 2, text: 'It would stall within a week. I am the business \u2014 the sales, the delivery, the strategy, the problem-solving. Without me, very little moves forward.' },
+      { letter: 'E', score: 1, text: 'It would collapse. I\'m so central to every function that even a 1-week absence creates cascading failures. I know this is unsustainable but I can\'t see how to change it.' }
+    ]
+  },
+  {
+    id: 16,
+    track: 'B',
+    dimension: 'Leverage Architecture',
+    text: 'How many of your current team members could you describe as genuinely A-players \u2014 people who make YOU better, not just people who do what you say?',
+    options: [
+      { letter: 'A', score: 5, text: '3+ true A-players. They challenge my thinking, own their domains, and losing any of them would be a real setback. I invest in them because they multiply everything.' },
+      { letter: 'B', score: 4, text: '1-2 A-players plus solid performers. I have a small core of excellence surrounded by adequate. I know who the keepers are.' },
+      { letter: 'C', score: 3, text: 'I have reliable people but no one I\'d call an A-player. They execute tasks but don\'t elevate the business. I\'m the only strategic thinker.' },
+      { letter: 'D', score: 2, text: 'I\'m tolerating underperformance. I know I should make changes but hiring, firing, and managing people feels like more work than doing it myself.' },
+      { letter: 'E', score: 1, text: 'I\'m essentially solo. I\'ve tried hiring and it hasn\'t worked \u2014 or I can\'t afford to hire \u2014 or I don\'t trust anyone else with my vision.' }
+    ]
+  },
+  {
+    id: 17,
+    track: 'B',
+    dimension: 'Authority Signal',
+    text: 'When a stranger in your industry hears your name, what\'s the most likely response?',
+    options: [
+      { letter: 'A', score: 5, text: 'They know who I am and what I stand for. I\'ve built a recognized authority position through consistent, valuable output. Within my niche, I\'m respected and sought out.' },
+      { letter: 'B', score: 4, text: 'Some people know me. I have a reputation in my immediate network and niche but I haven\'t broken through to broader recognition yet.' },
+      { letter: 'C', score: 3, text: 'They\'d probably need to Google me. I have credibility with people I\'ve worked with directly but no broader market presence. My work is good but invisible.' },
+      { letter: 'D', score: 2, text: 'I\'m one of many. Nothing distinguishes me from competitors in a meaningful way. I compete on price or convenience rather than positioning.' },
+      { letter: 'E', score: 1, text: 'I don\'t have a market position. I\'ve been so focused on delivery that I\'ve done zero positioning, thought leadership, or brand building. I\'m invisible by default, not by choice.' }
+    ]
+  },
+  {
+    id: 18,
+    track: 'B',
+    dimension: 'Authority Signal',
+    text: 'How clear is your unique mechanism \u2014 the specific way you deliver results that nobody else can replicate?',
+    options: [
+      { letter: 'A', score: 5, text: 'Crystal clear and proven. I can articulate it in one sentence, my clients experience it consistently, and it\'s the reason people choose me over alternatives.' },
+      { letter: 'B', score: 4, text: 'Clear to me but I struggle to communicate it. I know what makes me different but I haven\'t packaged it into a compelling, repeatable message.' },
+      { letter: 'C', score: 3, text: 'Vaguely defined. I sense that I\'m different but I can\'t point to a specific mechanism. My marketing says generic things like "we care more" or "personalized approach."' },
+      { letter: 'D', score: 2, text: 'I\'m not sure I have one. I might just be doing what everyone else does, slightly differently. The fear that I\'m a commodity keeps me up at night.' },
+      { letter: 'E', score: 1, text: 'I\'ve been avoiding this question. Defining what makes me unique feels vulnerable because I\'m not sure the answer is compelling enough.' }
+    ]
+  },
+  {
+    id: 19,
+    track: 'B',
+    dimension: 'Founder Durability',
+    text: 'At your current pace, how long until something important breaks?',
+    options: [
+      { letter: 'A', score: 5, text: 'Indefinitely. I\'ve redesigned my business around sustainability. My pace is intense but not unsustainable. I have margin, recovery practices, and non-negotiable boundaries.' },
+      { letter: 'B', score: 4, text: '5+ years. I\'m not perfectly balanced but I\'m not burning out either. I have seasons of intensity followed by genuine recovery. The trend is toward sustainability.' },
+      { letter: 'C', score: 3, text: '2-3 years. I know I\'m on borrowed time. Something in my system \u2014 physical health, key relationship, mental health \u2014 is showing strain. I keep saying "I\'ll fix it after this next milestone."' },
+      { letter: 'D', score: 2, text: 'Less than a year. I\'m already showing signs of breakdown \u2014 sleep problems, health scares, relationship conflict, loss of motivation. The machine is overheating.' },
+      { letter: 'E', score: 1, text: 'I\'m already broken. Something has already cracked \u2014 burnout, health crisis, relationship ending, addiction, depression \u2014 and I\'m running on the fumes of who I used to be.' }
+    ]
+  },
+  {
+    id: 20,
+    track: 'B',
+    dimension: 'Founder Durability',
+    text: 'Last question. Complete this sentence honestly: "The thing I\'m most afraid to admit about my business is..."',
+    options: [
+      { letter: 'A', score: 5, text: '"...that I could be further ahead if I stopped getting in my own way. The business is good but I\'m the bottleneck \u2014 and the solution is internal, not strategic."' },
+      { letter: 'B', score: 4, text: '"...that I don\'t enjoy it as much as I pretend to. Parts of it light me up but I\'ve built a life around the parts that don\'t."' },
+      { letter: 'C', score: 3, text: '"...that I don\'t have a real plan. I\'ve been improvising and it\'s worked so far but I feel like I\'m one bad quarter from losing everything."' },
+      { letter: 'D', score: 2, text: '"...that I\'m exhausted and I don\'t know how to stop. I\'ve built a machine that requires me to keep running and I\'m terrified of what happens if I slow down."' },
+      { letter: 'E', score: 1, text: '"...that the gap between what I show people and what\'s actually happening is growing. The public story and the private reality are diverging \u2014 and I don\'t know how to close it."' }
+    ]
+  }
+];
+
+// Acknowledgments per question
+const ACKNOWLEDGMENTS = [
+  "That level of self-awareness under pressure is rare. Let's keep going.",
+  "Your nervous system baseline says more about your business than any P&L.",
+  "Your calendar tells the truth your vision board won't.",
+  "The gap between vision and daily reality is where most founders get stuck.",
+  "Decision velocity is one of the most underrated competitive advantages.",
+  "Energy management is the hidden infrastructure of sustainable growth.",
+  "The quality of truth you receive determines the quality of decisions you make.",
+  "Your team's response to your presence is your real leadership scorecard.",
+  "How you answer that reveals more than any business plan.",
+  "Most founders can't even name their pattern. Where you are with yours matters. Let's shift to your business.",
+  "Your relationship with money reveals your relationship with value.",
+  "The middle months don't lie. That's your actual business, not your best month.",
+  "Shipping velocity separates founders who talk from founders who build.",
+  "A growing to-do list isn't a productivity problem. It's a decision problem.",
+  "The 30-day test reveals whether you've built a business or a job.",
+  "A-players don't just do work. They multiply your capacity.",
+  "Reputation is compounding interest. Where you stand now determines future leverage.",
+  "Your mechanism is your moat. Without it, you're competing on effort alone.",
+  "Sustainability isn't a luxury. It's the infrastructure of everything else.",
+  "The thing you're most afraid to admit is usually the thing that unlocks everything."
+];
+
+// Dimension metadata
+const FREEDOM_DIMENSIONS = ['Pressure Response', 'Integrity Alignment', 'Operational Clarity', 'Relational Power', 'Self-Knowledge'];
+const ALIGNMENT_DIMENSIONS = ['Money Truth', 'Shipping Velocity', 'Leverage Architecture', 'Authority Signal', 'Founder Durability'];
+
+// FCI levels
+const FCI_LEVELS = [
+  { min: 85, max: 100, level: 'COHERENT', color: '#1B7A4A', meaning: 'Rare. Internal and external systems are aligned. Your growth is sustainable and accelerating.' },
+  { min: 70, max: 84, level: 'ALIGNED', color: '#2D9C6F', meaning: 'Strong foundation with specific friction points. You\'re close \u2014 targeted upgrades will be transformative.' },
+  { min: 55, max: 69, level: 'EMERGING', color: '#C9943E', meaning: 'You know something\'s off but can\'t name it. Old patterns are creating invisible drag on your business.' },
+  { min: 40, max: 54, level: 'MISALIGNED', color: '#D4762C', meaning: 'Significant gap between who you are and how your business operates. You\'re working harder than you should for less than you deserve.' },
+  { min: 25, max: 39, level: 'FRACTURED', color: '#C94A3E', meaning: 'Internal and external systems are fighting each other. Growth feels exhausting because it IS \u2014 your operating systems are in conflict.' },
+  { min: 0, max: 24, level: 'CRITICAL', color: '#A82D2D', meaning: 'Multiple systems in crisis. The business is running on willpower, not architecture. Immediate intervention recommended.' }
+];
+
+// State
+let currentQuestion = 0;
+let answers = [];
+let userName = '';
+let userEmail = '';
+
+// =============================================
+// SCREEN NAVIGATION
+// =============================================
+function showScreen(id) {
+  document.querySelectorAll('[id^="screen-"]').forEach(s => {
+    s.style.display = 'none';
+  });
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Results page is a flowing document (block), all other screens use flex centering
+  el.style.display = (id === 'screen-results') ? 'block' : 'flex';
+}
+
+function showEmailScreen() {
+  showScreen('screen-email');
+}
+
+function startAssessment() {
+  userName = document.getElementById('input-name').value.trim();
+  userEmail = document.getElementById('input-email').value.trim();
+  if (!userName || !userEmail) {
+    document.getElementById('input-name').style.borderColor = userName ? '#E2E8F0' : '#E85D4A';
+    document.getElementById('input-email').style.borderColor = userEmail ? '#E2E8F0' : '#E85D4A';
+    return;
+  }
+  showScreen('screen-assessment');
+  renderQuestion(0);
+}
+
+// =============================================
+// QUESTION RENDERING
+// =============================================
+function renderQuestion(index) {
+  currentQuestion = index;
+  const q = QUESTIONS[index];
+  const body = document.getElementById('assessment-body');
+  const progressText = document.getElementById('progress-text');
+  const progressBar = document.getElementById('progress-bar');
+
+  progressText.textContent = `Q${index + 1} / 20`;
+  progressBar.style.width = `${((index + 1) / 20) * 100}%`;
+
+  const trackLabel = q.track === 'A' ? 'TRACK A: INTERNAL OPERATING SYSTEM' : 'TRACK B: EXTERNAL BUSINESS ALIGNMENT';
+
+  // Randomize display order on even-numbered questions to prevent A=best pattern learning
+  // Score values travel with each option via opt.score, so scoring is unaffected
+  let displayOptions = [...q.options];
+  if (q.id % 2 === 0) {
+    for (let i = displayOptions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [displayOptions[i], displayOptions[j]] = [displayOptions[j], displayOptions[i]];
+    }
+  }
+
+  body.innerHTML = `
+    <div class="track-label">${trackLabel}</div>
+    <div class="dimension-label">${q.dimension}</div>
+    <div class="question-card">
+      <div class="question-number">QUESTION ${q.id} OF 20</div>
+      <div class="question-text">${q.text}</div>
+      <div class="answer-options">
+        ${displayOptions.map((opt, i) => `
+          <div class="answer-option" onclick="selectAnswer(${index}, ${opt.score}, ${i})" id="opt-${i}">
+            <div class="answer-letter">${opt.letter}</div>
+            <div class="answer-text">${opt.text}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectAnswer(qIndex, score, optIndex) {
+  // Highlight selected
+  document.querySelectorAll('.answer-option').forEach(o => o.classList.remove('selected'));
+  document.getElementById(`opt-${optIndex}`).classList.add('selected');
+
+  // Store answer
+  answers[qIndex] = score;
+
+  // Brief pause then move
+  setTimeout(() => {
+    if (qIndex === 9) {
+      showTrackTransition();
+    } else if (qIndex < 19) {
+      showAcknowledgment(qIndex);
+    } else {
+      showCalculating();
+    }
+  }, 400);
+}
+
+function showAcknowledgment(qIndex) {
+  const body = document.getElementById('assessment-body');
+  body.innerHTML = `
+    <div class="acknowledgment">
+      <p>${ACKNOWLEDGMENTS[qIndex]}</p>
+    </div>
+  `;
+  setTimeout(() => renderQuestion(qIndex + 1), 1800);
+}
+
+function showTrackTransition() {
+  const body = document.getElementById('assessment-body');
+  body.innerHTML = `
+    <div class="track-transition">
+      <div class="checkpoint-badge">\u2713 CHECKPOINT</div>
+      <h3>Internal OS Scan Complete</h3>
+      <p>I've got a clear read on your internal operating system. Now I need to see the other side \u2014 how your business is actually operating.</p>
+      <p>These next 10 questions measure the gap between where you think your business is and where it actually is.</p>
+      <p><em>Note: Some questions reference teams, revenue, or clients. If you're pre-revenue or solo, answer based on your current reality or closest equivalent. Every stage has signal worth measuring.</em></p>
+      <p style="font-weight: 600; color: var(--color-navy);">Same rule: answer from reality, not aspiration.</p>
+      <button class="btn-primary" onclick="renderQuestion(10)" style="margin-top: 20px;">
+        Continue to Business Alignment &rarr;
+      </button>
+    </div>
+  `;
+}
+
+// =============================================
+// CALCULATING SCREEN
+// =============================================
+function showCalculating() {
+  showScreen('screen-calculating');
+  const steps = ['calc-step-1', 'calc-step-2', 'calc-step-3', 'calc-step-4', 'calc-step-5'];
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i > 0) document.getElementById(steps[i - 1]).classList.replace('active', 'done');
+    if (i < steps.length) {
+      document.getElementById(steps[i]).classList.add('active');
+      i++;
+    } else {
+      clearInterval(interval);
+      setTimeout(() => showResults(), 600);
+    }
+  }, 700);
+}
+
+// =============================================
+// SCORING ENGINE
+// =============================================
+function computeResults() {
+  const freedomScore = answers.slice(0, 10).reduce((a, b) => a + b, 0);
+  const alignmentScore = answers.slice(10, 20).reduce((a, b) => a + b, 0);
+  const fci = freedomScore + alignmentScore;
+
+  // Dimension scores (pairs of 2 questions)
+  const freedomDims = {};
+  FREEDOM_DIMENSIONS.forEach((name, i) => {
+    freedomDims[name] = answers[i * 2] + answers[i * 2 + 1];
+  });
+
+  const alignmentDims = {};
+  ALIGNMENT_DIMENSIONS.forEach((name, i) => {
+    alignmentDims[name] = answers[10 + i * 2] + answers[10 + i * 2 + 1];
+  });
+
+  // FCI Level
+  const fciLevel = FCI_LEVELS.find(l => fci >= l.min && fci <= l.max) || FCI_LEVELS[FCI_LEVELS.length - 1];
+
+  // Gap pattern
+  let gapPattern;
+  if (freedomScore >= alignmentScore + 10) {
+    gapPattern = {
+      name: 'Evolved Founder, Broken Business',
+      desc: `Your internal operating system scores ${freedomScore}/50 while your business alignment sits at ${alignmentScore}/50. You've done the growth work \u2014 you've invested in yourself, developed real self-awareness, and built genuine emotional capacity. But your business hasn't caught up. The bottleneck isn't psychology. It's systems, positioning, and execution architecture. You're not broken \u2014 your business infrastructure hasn't been built to match who you've become.`
+    };
+  } else if (alignmentScore >= freedomScore + 10) {
+    gapPattern = {
+      name: 'Successful Founder, Suffering Human',
+      desc: `Your business alignment scores ${alignmentScore}/50 while your internal operating system sits at ${freedomScore}/50. You've built something impressive by almost any external measure. But underneath the achievement, something is straining. Your business architecture outpaces your internal operating system. The bottleneck is internal, not strategic. Growth from here requires upgrading who you ARE, not what you BUILD.`
+    };
+  } else {
+    gapPattern = {
+      name: 'Coherent but Capped',
+      desc: `Your internal OS (${freedomScore}/50) and business alignment (${alignmentScore}/50) are roughly matched \u2014 within 10 points of each other. This means your systems aren't fighting each other, which is good. But it also means growth requires upgrading BOTH simultaneously. Improving one without the other creates a new gap. This is exactly why the Dual-OS model exists.`
+    };
+  }
+
+  // Primary bottleneck (lowest dimension)
+  const allDims = { ...freedomDims, ...alignmentDims };
+  let bottleneckName = '';
+  let bottleneckScore = 11;
+  for (const [name, score] of Object.entries(allDims)) {
+    if (score < bottleneckScore) {
+      bottleneckScore = score;
+      bottleneckName = name;
+    }
+  }
+
+  // Cross-pattern detection
+  const crossPatterns = [];
+  if (freedomDims['Pressure Response'] <= 4 && alignmentDims['Founder Durability'] <= 4) {
+    crossPatterns.push({ name: 'The Pressure Cooker', desc: 'Internal stress AND unsustainable pace \u2014 you\'re heading for breakdown. Your nervous system is in chronic alert while your schedule offers no recovery.' });
+  }
+  if (freedomDims['Self-Knowledge'] >= 8 && alignmentDims['Authority Signal'] <= 4) {
+    crossPatterns.push({ name: 'The Invisible Expert', desc: 'Deep self-awareness but no market presence. You\'re a hidden genius \u2014 the gap between what you know and what the market sees is costing you compounding returns.' });
+  }
+  if (freedomDims['Operational Clarity'] >= 8 && freedomDims['Relational Power'] <= 4) {
+    crossPatterns.push({ name: 'The Lonely Achiever', desc: 'Great at execution, struggling with relationships. This creates a scaling ceiling \u2014 you can only grow as far as you can trust and lead others.' });
+  }
+  if (freedomDims['Integrity Alignment'] <= 4 && alignmentDims['Money Truth'] >= 8) {
+    crossPatterns.push({ name: 'The Values Vampire', desc: 'Making money but losing your soul. The misalignment between your values and your revenue engine is creating corrosion you can feel but haven\'t named.' });
+  }
+  if (freedomDims['Self-Knowledge'] >= 8 && alignmentDims['Shipping Velocity'] <= 4) {
+    crossPatterns.push({ name: 'The Brilliant Mess', desc: 'High insight, low output. You understand yourself deeply but that understanding hasn\'t translated into execution. Awareness without action is the therapy trap.' });
+  }
+  if (alignmentDims['Money Truth'] >= 8 && alignmentDims['Founder Durability'] <= 4) {
+    crossPatterns.push({ name: 'The Golden Cage', desc: 'Profitable but imprisoned. You\'ve built financial success at the cost of your freedom. The business runs well but you\'re trapped inside it.' });
+  }
+
+  // Bottleneck descriptions
+  const bottleneckDescriptions = {
+    'Pressure Response': 'Your ability to stay regulated under pressure is the foundation everything else is built on. When this cracks, decision quality drops, relationships strain, and your team absorbs your stress. This isn\'t about being tougher \u2014 it\'s about rewiring your default response.',
+    'Integrity Alignment': 'The gap between your values and your calendar is bleeding energy, motivation, and meaning from your work. Every hour spent on misaligned activity is a withdrawal from your capacity to do what actually matters.',
+    'Self-Knowledge': 'You can\'t architect what you can\'t see. The patterns you repeat unconsciously are driving decisions, relationships, and strategy in ways you haven\'t examined. This blind spot has a compounding cost.',
+    'Relational Power': 'Your growth ceiling is set by the quality of relationships around you. Without honest feedback and deep trust, you\'re making decisions in an echo chamber \u2014 and your team is editing the truth before it reaches you.',
+    'Operational Clarity': 'Decision paralysis and energy mismanagement create a hidden tax on everything you do. Every delayed decision costs compound interest. Every draining activity steals from your zone of genius.',
+    'Money Truth': 'Your relationship with pricing and revenue isn\'t just about strategy \u2014 it\'s about identity. Until you resolve the internal friction around money, no amount of tactical advice will move the needle.',
+    'Shipping Velocity': 'Ideas without execution are just entertainment. Your completion rate is the single best predictor of business growth. The graveyard of 80%-done projects represents real revenue left on the table.',
+    'Leverage Architecture': 'If your business can\'t run without you, you don\'t own a business \u2014 you own a job. The absence of leverage means every growth opportunity requires more of YOUR time, which is already maxed out.',
+    'Authority Signal': 'Invisible expertise has zero market value. You\'re competing on effort when you could be competing on positioning. Every day without authority building is a day your competitors compound their advantage.',
+    'Founder Durability': 'Everything else on this report is irrelevant if you break. Sustainability isn\'t a nice-to-have \u2014 it\'s the infrastructure that makes all other growth possible. The timeline you\'re on is shorter than you think.'
+  };
+
+  return {
+    freedomScore,
+    alignmentScore,
+    fci,
+    fciLevel,
+    freedomDims,
+    alignmentDims,
+    gapPattern,
+    bottleneckName,
+    bottleneckScore,
+    bottleneckDesc: bottleneckDescriptions[bottleneckName] || '',
+    crossPatterns
+  };
+}
+
+// =============================================
+// RESULTS RENDERING
+// =============================================
+function showResults() {
+  const r = computeResults();
+  const resultsEl = document.getElementById('screen-results');
+
+  // Dim signal descriptions
+  function dimSignal(name, score) {
+    if (score >= 9) return 'Strong. This is an asset.';
+    if (score >= 7) return 'Solid foundation with room to sharpen.';
+    if (score >= 5) return 'Functional but creating drag.';
+    if (score >= 3) return 'Significant friction. Needs attention.';
+    return 'Critical constraint. Priority upgrade.';
+  }
+
+  function dimBarColor(score) {
+    if (score >= 9) return '#1B7A4A';
+    if (score >= 7) return '#2D9C6F';
+    if (score >= 5) return '#C9943E';
+    if (score >= 3) return '#D4762C';
+    return '#A82D2D';
+  }
+
+  // Build freedom dimensions HTML
+  let freedomDimsHTML = '';
+  FREEDOM_DIMENSIONS.forEach(name => {
+    const score = r.freedomDims[name];
+    freedomDimsHTML += `
+      <div class="dimension-row">
+        <div class="dim-name">${name}</div>
+        <div class="dim-score-bar">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width: ${score * 10}%; background: ${dimBarColor(score)};"></div></div>
+          <div class="dim-score-num">${score}/10</div>
+        </div>
+      </div>
+    `;
+  });
+
+  let alignDimsHTML = '';
+  ALIGNMENT_DIMENSIONS.forEach(name => {
+    const score = r.alignmentDims[name];
+    alignDimsHTML += `
+      <div class="dimension-row">
+        <div class="dim-name">${name}</div>
+        <div class="dim-score-bar">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width: ${score * 10}%; background: ${dimBarColor(score)};"></div></div>
+          <div class="dim-score-num">${score}/10</div>
+        </div>
+      </div>
+    `;
+  });
+
+  // Cross patterns HTML
+  let crossHTML = '';
+  if (r.crossPatterns.length > 0) {
+    crossHTML = `
+      <div class="results-section">
+        <h2>Cross-Pattern Alert${r.crossPatterns.length > 1 ? 's' : ''}</h2>
+        <p class="section-subtitle">These patterns emerge when specific dimensions interact in concerning ways.</p>
+        <div class="cross-patterns-grid">
+          ${r.crossPatterns.map(cp => `
+            <div class="cross-pattern-alert">
+              <div class="cross-alert-icon">\u26A0</div>
+              <div>
+                <div class="cross-alert-name">${cp.name}</div>
+                <div class="cross-alert-desc">${cp.desc}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  resultsEl.innerHTML = `
+    <!-- HERO: FCI SCORE -->
+    <div class="results-hero">
+      <div class="results-label">YOUR FOUNDER COHERENCE INDEX\u2122 PREVIEW</div>
+      <div class="fci-score-display" style="color: ${r.fciLevel.color};">${r.fci}</div>
+      <div class="fci-label-text" style="color: ${r.fciLevel.color};">${r.fciLevel.level}</div>
+      <p class="fci-interpretation">${r.fciLevel.meaning}</p>
+      <p style="font-size: 0.85em; color: #8896A6; margin-top: 12px; font-style: italic;">Note: This is a directional indicator based on 20 compressed questions, not a clinical instrument. It reveals patterns worth investigating, not permanent diagnoses. Your full Founder Freedom Assessment (40 questions, depth checks, pattern analysis) provides significantly higher resolution.</p>
+    </div>
+
+    <!-- DUAL-OS SNAPSHOT -->
+    <div class="results-section">
+      <h2>Your Dual-OS Snapshot</h2>
+      <p class="section-subtitle">${userName}, here's how your two operating systems are performing.</p>
+      <div class="dual-os-grid">
+        <div class="os-panel">
+          <div class="os-panel-header">
+            <div class="os-panel-title">Internal OS (Freedom)</div>
+            <div class="os-panel-score">${r.freedomScore}/50</div>
+          </div>
+          ${freedomDimsHTML}
+        </div>
+        <div class="os-panel">
+          <div class="os-panel-header">
+            <div class="os-panel-title">External OS (Alignment)</div>
+            <div class="os-panel-score">${r.alignmentScore}/50</div>
+          </div>
+          ${alignDimsHTML}
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP PATTERN -->
+    <div class="results-section">
+      <h2>Where Your Systems Collide</h2>
+      <p class="section-subtitle">The gap between your internal and external operating systems.</p>
+      <div class="gap-pattern-card">
+        <div class="gap-pattern-name">${r.gapPattern.name}</div>
+        <p class="gap-pattern-desc">${r.gapPattern.desc}</p>
+      </div>
+    </div>
+
+    <!-- PRIMARY BOTTLENECK -->
+    <div class="results-section">
+      <h2>Your Primary Bottleneck</h2>
+      <p class="section-subtitle">The single constraint creating the most downstream damage.</p>
+      <div class="bottleneck-card">
+        <div class="bottleneck-badge">\u25CF PRIMARY BOTTLENECK</div>
+        <div class="bottleneck-dim-name">${r.bottleneckName}</div>
+        <div class="bottleneck-score">${r.bottleneckScore}/10</div>
+        <p class="bottleneck-desc">${r.bottleneckDesc}</p>
+      </div>
+    </div>
+
+    <!-- CROSS PATTERNS -->
+    ${crossHTML}
+
+    <!-- FREEDOM KEY -->
+    <div class="freedom-key-section">
+      <div class="freedom-key-card">
+        <h2>Your Freedom Key Moment</h2>
+        <p>Based on what this assessment revealed, try this right now:</p>
+        <div class="tfw-grid">
+          <div class="tfw-item">
+            <div class="tfw-icon">\uD83D\uDCA1</div>
+            <div class="tfw-label">THINK</div>
+            <div class="tfw-prompt">What are you thinking as you look at these numbers?</div>
+          </div>
+          <div class="tfw-item">
+            <div class="tfw-icon">\u2764\uFE0F</div>
+            <div class="tfw-label">FEEL</div>
+            <div class="tfw-prompt">What are you feeling \u2014 not what you think you should feel, but what's actually happening in your body?</div>
+          </div>
+          <div class="tfw-item">
+            <div class="tfw-icon">\uD83C\uDFAF</div>
+            <div class="tfw-label">WANT</div>
+            <div class="tfw-prompt">What do you want to do with this information?</div>
+          </div>
+        </div>
+        <p class="freedom-key-attribution">
+          That 3-step process \u2014 Think, Feel, Want \u2014 is the <strong>Freedom Key</strong>, created by Mark Rampolla. It's the foundational tool of FreedomOS. Most founders have never paused long enough to run this sequence. The fact that you just did puts you ahead of 90% of your peers.
+        </p>
+      </div>
+    </div>
+
+    <!-- WHAT THIS PREVIEW DOESN'T SHOW -->
+    <div class="results-section">
+      <div class="preview-limits">
+        <h2 style="text-align: center;">What This Preview Doesn't Show You</h2>
+        <p class="section-subtitle" style="text-align: center;">This assessment measured 10 compressed dimensions. The full experience measures 50+ dimensions across two complete operating systems.</p>
+        <div class="preview-compare">
+          <div class="compare-card">
+            <h4>The Freedom Assessor</h4>
+            <div class="by-line">40 questions \u00b7 10 full dimensions \u00b7 By Mark Rampolla</div>
+            <p>Produces your complete Freedom Score with depth ratings, pattern detection, and specific FreedomOS tool prescriptions.</p>
+          </div>
+          <div class="compare-card">
+            <h4>The GLM Calibrator</h4>
+            <div class="by-line">22 checkpoints \u00b7 450+ questions \u00b7 By Marcus Bell</div>
+            <p>Produces your complete Founder Genome Report with 95-99.9% prediction accuracy using 15+ personality frameworks.</p>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 24px; color: var(--color-slate); font-size: 0.95rem;">Together, they produce your full Founder Coherence Index\u2122. Your preview score is <strong style="color: var(--color-navy);">${r.fci}</strong>. Your full score will be different \u2014 usually more revealing.</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2>Your Next Step</h2>
+      <p>Book a Freedom Strategy Call \u2014 a 15-minute conversation where we review your full FCI preview, identify your top 3 transformation opportunities, and determine whether The Freedom Launchpad is the right fit.</p>
+      <div class="cta-details">
+        <div class="cta-detail"><span class="check">\u2713</span> 15 minutes of genuine diagnostic insight</div>
+        <div class="cta-detail"><span class="check">\u2713</span> Not a sales call disguised as coaching</div>
+        <div class="cta-detail"><span class="check">\u2713</span> We tell you exactly what we see</div>
+      </div>
+      <a href="#" class="btn-cta-large" onclick="alert('Freedom Strategy Call booking link goes here. Connect to your Calendly or scheduling tool.'); return false;">
+        Book Your Freedom Strategy Call &rarr;
+      </a>
+    </div>
+
+    <!-- EXPORT -->
+    <div class="export-row">
+      <button class="btn-export" onclick="exportJSON()">
+        \u2B73 Export Assessment Data (JSON)
+      </button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="results-footer">
+      <p>The <span class="gold">Freedom Launchpad</span> &mdash; Two Operating Systems. One Transformed Founder.</p>
+      <p style="margin-top: 8px;">Designed by Mark Rampolla &amp; Marcus Bell &middot; &copy; ${new Date().getFullYear()} All rights reserved</p>
+    </div>
+  `;
+
+  showScreen('screen-results');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// =============================================
+// JSON EXPORT
+// =============================================
+function exportJSON() {
+  const r = computeResults();
+  const urgency = r.fci < 40 ? 'HIGH' : r.fci < 70 ? 'MEDIUM' : 'STANDARD';
+
+  const data = {
+    assessment_type: 'founder_freedom_assessment',
+    version: '1.0',
+    timestamp: new Date().toISOString(),
+    respondent: {
+      name: userName,
+      email: userEmail
+    },
+    fci_preview: {
+      total: r.fci,
+      level: r.fciLevel.level,
+      freedom_score_preview: r.freedomScore,
+      alignment_score_preview: r.alignmentScore
+    },
+    freedom_dimensions: {
+      pressure_response: r.freedomDims['Pressure Response'],
+      integrity_alignment: r.freedomDims['Integrity Alignment'],
+      self_knowledge: r.freedomDims['Self-Knowledge'],
+      relational_power: r.freedomDims['Relational Power'],
+      operational_clarity: r.freedomDims['Operational Clarity']
+    },
+    alignment_dimensions: {
+      money_truth: r.alignmentDims['Money Truth'],
+      shipping_velocity: r.alignmentDims['Shipping Velocity'],
+      leverage_architecture: r.alignmentDims['Leverage Architecture'],
+      authority_signal: r.alignmentDims['Authority Signal'],
+      founder_durability: r.alignmentDims['Founder Durability']
+    },
+    gap_pattern: r.gapPattern.name,
+    primary_bottleneck: r.bottleneckName,
+    cross_patterns_triggered: r.crossPatterns.map(cp => cp.name),
+    recommended_next_step: 'freedom_strategy_call',
+    email_sequence: 'dual_os_discovery_7day',
+    nurture_personalization: {
+      day_1_focus: 'fci_explanation',
+      day_5_anti_pattern: r.bottleneckName.toLowerCase().replace(/\s+/g, '_'),
+      urgency_level: urgency
+    },
+    raw_answers: answers
+  };
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `FCI_Preview_${userName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
