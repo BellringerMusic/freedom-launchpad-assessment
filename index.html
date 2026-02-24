@@ -1574,16 +1574,10 @@ function showEmailScreen() {
 }
 
 function subscribeToLaylo(email) {
-  fetch('https://laylo.com/api/graphql', {
+  fetch('/subscribe', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbklkIjoiZWE4YzU0MWEtNDgzNC00YWUxLTkwNWYtZmM2YWY1MWFjODMyIiwidXNlcklkIjoiZjM0bTRFR1NHS1ZFR1hzeVQ1TjU4Zk1LWiIsInRva2VuVHlwZSI6IlNVQlNDUklCRSIsImhhc0NsaWVudEFjY2VzcyI6dHJ1ZSwiY3JlYXRlZCI6MTc3MTk2MTMyMTM4OSwibGFiZWwiOiJGcmVlZG9tRkNJIiwiaWF0IjoxNzcxOTYxMzIxfQ.3jIFmSbpnDd5_si75BFhXVmWoj3naEXJRs9rm4YyN04'
-    },
-    body: JSON.stringify({
-      query: 'mutation($email: String) { subscribeToUser(email: $email) }',
-      variables: { email: email }
-    })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
   }).catch(function() {});
 }
 

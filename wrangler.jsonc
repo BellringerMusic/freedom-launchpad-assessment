@@ -1,6 +1,7 @@
 {
   "name": "freedom-launchpad-assessment",
   "compatibility_date": "2026-02-20",
+  "main": "worker.js",
   "assets": {
     "directory": "./"
   }
