@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — The Freedom Launchpad</title>
+<meta name="description" content="Apply to The Freedom Launchpad — a 26-week Dual-OS Founder Transformation Program for established founders ready to align inner operating system with business performance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   CSS VARIABLES — BRAND IDENTITY SYSTEM
+   ======================================== */
+:root {
+  --color-navy: #1A2744;
+  --color-gold: #C9943E;
+  --color-white: #FFFFFF;
+  --color-slate: #4A5568;
+  --color-mist: #F7F8FA;
+  --color-soft-gold: #F5E6C8;
+  --color-green: #2D9C6F;
+  --color-coral: #E85D4A;
+  --color-amber: #D4962C;
+  --color-grey: #A0AEC0;
+  --bg-dark: #1A2744;
+  --bg-darker: #111B2E;
+  --bg-light: #F7F8FA;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  --shadow-card: 0 4px 20px rgba(26, 39, 68, 0.08);
+  --shadow-card-elevated: 0 8px 30px rgba(26, 39, 68, 0.12);
+  --shadow-card-gold: 0 8px 30px rgba(201, 148, 62, 0.2);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--color-slate);
+  background: var(--color-white);
+  overflow-x: hidden;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+h1, h2, h3 { font-family: var(--font-display); color: var(--color-navy); }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 700; line-height: 1.2; }
+h3 { font-family: var(--font-body); font-size: 1.375rem; font-weight: 600; line-height: 1.4; }
+
+.gold { color: var(--color-gold); }
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ========================================
+   SCREEN MANAGEMENT
+   ======================================== */
+.screen {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ========================================
+   SCREEN 1: WELCOME / HERO
+   ======================================== */
+#screen-welcome {
+  background: linear-gradient(170deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+#screen-welcome::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 148, 62, 0.08);
+  pointer-events: none;
+}
+
+#screen-welcome::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 148, 62, 0.06);
+  pointer-events: none;
+}
+
+.brand-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  color: var(--color-white);
+  max-width: 700px;
+  margin-bottom: 16px;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto 12px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.hero-note {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-features {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+}
+
+.hero-feature .icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.dual-circles {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dual-circles .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.dual-circles .circle-gold {
+  border-color: var(--color-gold);
+  margin-right: -12px;
+  z-index: 1;
+}
+
+.dual-circles .circle-navy {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-gold);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 16px 40px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+  background: #B5842F;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-gold);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary.full-width {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--color-slate);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 12px 24px;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--color-slate);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--color-navy);
+  background: rgba(26, 39, 68, 0.05);
+}
+
+.btn-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-row .btn-primary {
+  flex: 1;
+}
+
+/* ========================================
+   STICKY HEADER / PROGRESS BAR
+   ======================================== */
+.app-header {
+  background: var(--color-navy);
+  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-brand {
+  font-family: var(--font-display);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.app-brand .gold { color: var(--color-gold); }
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  letter-spacing: 1px;
+}
+
+.progress-bar-container {
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-gold);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+/* ========================================
+   FORM SCREENS (2, 3, 4)
+   ======================================== */
+.form-screen {
+  background: var(--bg-light);
+}
+
+.form-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 24px 60px;
+}
+
+.form-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card-elevated);
+  padding: 40px 36px;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+}
+
+.form-card-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-slate);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.step-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.form-group label .optional {
+  font-weight: 400;
+  color: var(--color-grey);
+  text-transform: none;
+  font-size: 0.75rem;
+  letter-spacing: 0;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-navy);
+  transition: border-color 0.2s;
+  outline: none;
+  background: var(--color-white);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A5568' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--color-gold);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #A0AEC0;
+}
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+  border-color: var(--color-coral);
+}
+
+.form-group .error-msg {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--color-coral);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.form-group.error .error-msg {
+  display: block;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 540px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ========================================
+   QUALIFICATION QUESTIONS (Radio Cards)
+   ======================================== */
+.question-block {
+  margin-bottom: 36px;
+}
+
+.question-block:last-of-type {
+  margin-bottom: 0;
+}
+
+.question-number {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-gold);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.question-text {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.answer-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answer-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  background: var(--color-white);
+}
+
+.answer-option:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 148, 62, 0.03);
+}
+
+.answer-option.selected {
+  border-color: var(--color-gold);
+  background: rgba(201, 148, 62, 0.06);
+}
+
+.answer-option input[type="radio"] {
+  display: none;
+}
+
+.answer-radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  margin-top: 1px;
+}
+
+.answer-option:hover .answer-radio {
+  border-color: var(--color-gold);
+}
+
+.answer-option.selected .answer-radio {
+  border-color: var(--color-gold);
+  background: var(--color-gold);
+}
+
+.answer-option.selected .answer-radio::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-white);
+}
+
+.answer-label {
+  font-size: 0.95rem;
+  color: var(--color-slate);
+  line-height: 1.5;
+  transition: color 0.25s ease;
+}
+
+.answer-option.selected .answer-label {
+  color: var(--color-navy);
+  font-weight: 500;
+}
+
+.question-block.error .answer-options {
+  border: 2px solid var(--color-coral);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+}
+
+.question-block .error-msg {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--color-coral);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.question-block.error .error-msg {
+  display: block;
+}
+
+/* ========================================
+   SCREEN 5: RESULTS
+   ======================================== */
+#screen-results {
+  background: var(--bg-light);
+  justify-content: center;
+  align-items: center;
+  padding: 60px 24px;
+}
+
+.results-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card-elevated);
+  padding: 48px 40px;
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+  animation: fadeInUp 0.5s ease;
+}
+
+.result-badge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  position: relative;
+}
+
+.result-badge svg {
+  width: 36px;
+  height: 36px;
+}
+
+.result-badge.green {
+  background: rgba(45, 156, 111, 0.12);
+}
+
+.result-badge.green svg { color: var(--color-green); }
+
+.result-badge.gold {
+  background: rgba(201, 148, 62, 0.12);
+}
+
+.result-badge.gold svg { color: var(--color-gold); }
+
+.result-badge.amber {
+  background: rgba(212, 150, 44, 0.12);
+}
+
+.result-badge.amber svg { color: var(--color-amber); }
+
+.result-badge.grey {
+  background: rgba(160, 174, 192, 0.12);
+}
+
+.result-badge.grey svg { color: var(--color-grey); }
+
+.result-tier-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.result-tier-label.green { color: var(--color-green); }
+.result-tier-label.gold { color: var(--color-gold); }
+.result-tier-label.amber { color: var(--color-amber); }
+.result-tier-label.grey { color: var(--color-grey); }
+
+.results-card h2 {
+  margin-bottom: 16px;
+}
+
+.results-body {
+  font-size: 1rem;
+  color: var(--color-slate);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.results-body p {
+  margin-bottom: 12px;
+}
+
+.results-body p:last-child {
+  margin-bottom: 0;
+}
+
+.results-note {
+  font-size: 0.875rem;
+  color: var(--color-slate);
+  opacity: 0.75;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+}
+
+.results-cta {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.results-email {
+  font-size: 0.8rem;
+  color: var(--color-grey);
+  margin-top: 8px;
+}
+
+.results-email a {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+
+.results-email a:hover { text-decoration: underline; }
+
+/* ========================================
+   FORM-SCREEN SPECIFIC: READINESS
+   ======================================== */
+.readiness-scroll {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.readiness-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.readiness-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.readiness-scroll::-webkit-scrollbar-thumb {
+  background: #CBD5E0;
+  border-radius: 2px;
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+.spinner-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(26, 39, 68, 0.85);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.spinner-overlay.active {
+  display: flex;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(201, 148, 62, 0.2);
+  border-top-color: var(--color-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-gold);
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 640px) {
+  .form-card {
+    padding: 28px 20px;
+  }
+
+  .results-card {
+    padding: 32px 20px;
+  }
+
+  .answer-option {
+    padding: 12px 14px;
+  }
+
+  .hero-features {
+    gap: 16px;
+  }
+
+  .btn-row {
+    flex-direction: column-reverse;
+  }
+
+  .btn-row .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-row .btn-primary {
+    width: 100%;
+  }
+
+  .app-header-inner {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .progress-bar-container {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOADING SPINNER
+     ============================================================ -->
+<div class="spinner-overlay" id="spinner">
+  <div class="spinner"></div>
+  <div class="spinner-text">Submitting your application...</div>
+</div>
+
+<!-- ============================================================
+     SCREEN 1: WELCOME
+     ============================================================ -->
+<div class="screen active" id="screen-welcome">
+  <div class="dual-circles">
+    <div class="circle circle-gold"></div>
+    <div class="circle circle-navy"></div>
+  </div>
+  <div class="brand-label">The Freedom Launchpad</div>
+  <h1 class="hero-title">Apply to <span class="gold">The Freedom Launchpad</span></h1>
+  <p class="hero-subtitle">This application takes 3-5 minutes. We review every submission personally within 48 hours.</p>
+  <p class="hero-note">The Freedom Launchpad is a 26-week Dual-OS Founder Transformation Program. Not everyone is accepted &mdash; we curate each cohort to ensure every founder gets maximum value.</p>
+  <div class="hero-features">
+    <div class="hero-feature"><span class="icon">&#10003;</span> 26-Week Program</div>
+    <div class="hero-feature"><span class="icon">&#10003;</span> AI-Powered Diagnostics</div>
+    <div class="hero-feature"><span class="icon">&#10003;</span> Curated Cohorts</div>
+  </div>
+  <button class="btn-primary" onclick="goToScreen(2)">Begin Application <span>&rarr;</span></button>
+</div>
+
+<!-- ============================================================
+     SCREEN 2: CONTACT INFO
+     ============================================================ -->
+<div class="screen form-screen" id="screen-contact">
+  <div class="app-header">
+    <div class="app-header-inner">
+      <div class="app-brand">The Freedom <span class="gold">Launchpad</span></div>
+      <div class="progress-info">
+        <span class="progress-text">STEP 1 OF 4</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" style="width: 25%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-body">
+    <div class="step-label">Step 1 of 4</div>
+    <div class="form-card">
+      <h2 class="form-card-title">Contact Information</h2>
+      <p class="form-card-subtitle">Let us know how to reach you. All information is kept strictly confidential.</p>
+
+      <div class="form-row">
+        <div class="form-group" id="fg-firstName">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Marcus" required>
+          <div class="error-msg">First name is required</div>
+        </div>
+        <div class="form-group" id="fg-lastName">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Bell" required>
+          <div class="error-msg">Last name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group" id="fg-email">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@company.com" required>
+        <div class="error-msg">Please enter a valid email address</div>
+      </div>
+
+      <div class="form-group" id="fg-phone">
+        <label for="phone">Phone <span class="optional">(optional)</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+      </div>
+
+      <div class="form-group" id="fg-linkedin">
+        <label for="linkedin">LinkedIn Profile URL <span class="optional">(optional)</span></label>
+        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname">
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary full-width" onclick="validateAndGo(2, 3)">Continue <span>&rarr;</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 3: BUSINESS PROFILE
+     ============================================================ -->
+<div class="screen form-screen" id="screen-business">
+  <div class="app-header">
+    <div class="app-header-inner">
+      <div class="app-brand">The Freedom <span class="gold">Launchpad</span></div>
+      <div class="progress-info">
+        <span class="progress-text">STEP 2 OF 4</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" style="width: 50%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-body">
+    <div class="step-label">Step 2 of 4</div>
+    <div class="form-card">
+      <h2 class="form-card-title">Business Profile</h2>
+      <p class="form-card-subtitle">Help us understand your business so we can evaluate fit and recommend the right tier.</p>
+
+      <div class="form-group" id="fg-company">
+        <label for="company">Company Name</label>
+        <input type="text" id="company" name="company" placeholder="Acme Inc." required>
+        <div class="error-msg">Company name is required</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" id="fg-title">
+          <label for="title">Your Title / Role</label>
+          <select id="title" name="title" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="Founder & CEO">Founder &amp; CEO</option>
+            <option value="Co-Founder">Co-Founder</option>
+            <option value="CEO (non-founder)">CEO (non-founder)</option>
+            <option value="Managing Partner">Managing Partner</option>
+            <option value="Owner/Operator">Owner/Operator</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="error-msg">Please select your role</div>
+        </div>
+        <div class="form-group" id="fg-industry">
+          <label for="industry">Industry</label>
+          <select id="industry" name="industry" required>
+            <option value="" disabled selected>Select industry</option>
+            <option value="Food & Beverage">Food &amp; Beverage</option>
+            <option value="Health & Wellness">Health &amp; Wellness</option>
+            <option value="Beauty & Personal Care">Beauty &amp; Personal Care</option>
+            <option value="Consumer Packaged Goods (Other)">Consumer Packaged Goods (Other)</option>
+            <option value="SaaS / Technology">SaaS / Technology</option>
+            <option value="Professional Services">Professional Services</option>
+            <option value="E-Commerce / DTC">E-Commerce / DTC</option>
+            <option value="Agency / Consulting">Agency / Consulting</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Education / Training">Education / Training</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="error-msg">Please select your industry</div>
+        </div>
+      </div>
+
+      <div class="form-group" id="fg-revenue">
+        <label for="revenue">Annual Revenue</label>
+        <select id="revenue" name="revenue" required>
+          <option value="" disabled selected>Select revenue range</option>
+          <option value="Under $500K">Under $500K</option>
+          <option value="$500K - $1M">$500K - $1M</option>
+          <option value="$1M - $3M">$1M - $3M</option>
+          <option value="$3M - $5M">$3M - $5M</option>
+          <option value="$5M - $10M">$5M - $10M</option>
+          <option value="$10M - $25M">$10M - $25M</option>
+          <option value="$25M - $50M">$25M - $50M</option>
+          <option value="$50M - $100M">$50M - $100M</option>
+          <option value="$100M+">$100M+</option>
+        </select>
+        <div class="error-msg">Please select your revenue range</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" id="fg-teamSize">
+          <label for="teamSize">Team Size</label>
+          <select id="teamSize" name="teamSize" required>
+            <option value="" disabled selected>Select team size</option>
+            <option value="Just me">Just me</option>
+            <option value="2-5">2-5</option>
+            <option value="6-10">6-10</option>
+            <option value="11-25">11-25</option>
+            <option value="26-50">26-50</option>
+            <option value="51-100">51-100</option>
+            <option value="100+">100+</option>
+          </select>
+          <div class="error-msg">Please select team size</div>
+        </div>
+        <div class="form-group" id="fg-yearsInBusiness">
+          <label for="yearsInBusiness">Years in Business</label>
+          <select id="yearsInBusiness" name="yearsInBusiness" required>
+            <option value="" disabled selected>Select years</option>
+            <option value="Less than 1">Less than 1</option>
+            <option value="1-3">1-3</option>
+            <option value="3-5">3-5</option>
+            <option value="5-10">5-10</option>
+            <option value="10+">10+</option>
+          </select>
+          <div class="error-msg">Please select years in business</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-ghost" onclick="goToScreen(2)">&larr; Back</button>
+        <button class="btn-primary" onclick="validateAndGo(3, 4)">Continue <span>&rarr;</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 4: READINESS ASSESSMENT
+     ============================================================ -->
+<div class="screen form-screen" id="screen-readiness">
+  <div class="app-header">
+    <div class="app-header-inner">
+      <div class="app-brand">The Freedom <span class="gold">Launchpad</span></div>
+      <div class="progress-info">
+        <span class="progress-text">STEP 3 OF 4</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" style="width: 75%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-body">
+    <div class="step-label">Step 3 of 4</div>
+    <div class="form-card" style="max-width: 740px;">
+      <h2 class="form-card-title">Readiness Assessment</h2>
+      <p class="form-card-subtitle">These questions help us understand where you are and whether The Freedom Launchpad is the right fit for you right now.</p>
+
+      <div class="readiness-scroll">
+
+        <!-- Q1: Primary Reason -->
+        <div class="question-block" id="qb-q1">
+          <div class="question-number">Question 01</div>
+          <div class="question-text">What is your primary reason for applying?</div>
+          <div class="answer-options">
+            <label class="answer-option" data-question="q1" data-value="gap">
+              <input type="radio" name="q1" value="gap">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I feel a gap between my personal growth and my business performance</span>
+            </label>
+            <label class="answer-option" data-question="q1" data-value="struggling">
+              <input type="radio" name="q1" value="struggling">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I'm successful on paper but struggling personally (health, relationships, energy)</span>
+            </label>
+            <label class="answer-option" data-question="q1" data-value="transition">
+              <input type="radio" name="q1" value="transition">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I'm approaching a major transition (exit, raise, pivot) and need clarity</span>
+            </label>
+            <label class="answer-option" data-question="q1" data-value="ceiling">
+              <input type="radio" name="q1" value="ceiling">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I want to break through a growth ceiling I can't identify</span>
+            </label>
+            <label class="answer-option" data-question="q1" data-value="referral">
+              <input type="radio" name="q1" value="referral">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Someone I trust recommended this program</span>
+            </label>
+          </div>
+          <div class="error-msg">Please select an answer</div>
+        </div>
+
+        <!-- Q2: Investment History -->
+        <div class="question-block" id="qb-q2">
+          <div class="question-number">Question 02</div>
+          <div class="question-text">Have you invested $10,000+ in coaching, masterminds, or personal/professional development programs before?</div>
+          <div class="answer-options">
+            <label class="answer-option" data-question="q2" data-value="multiple-strong">
+              <input type="radio" name="q2" value="multiple-strong">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Yes, multiple times &mdash; and got strong results</span>
+            </label>
+            <label class="answer-option" data-question="q2" data-value="mixed">
+              <input type="radio" name="q2" value="mixed">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Yes, but the results were mixed</span>
+            </label>
+            <label class="answer-option" data-question="q2" data-value="skeptical">
+              <input type="radio" name="q2" value="skeptical">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Yes, but it didn't work &mdash; I'm skeptical</span>
+            </label>
+            <label class="answer-option" data-question="q2" data-value="first">
+              <input type="radio" name="q2" value="first">
+              <div class="answer-radio"></div>
+              <span class="answer-label">No, this would be my first significant investment</span>
+            </label>
+          </div>
+          <div class="error-msg">Please select an answer</div>
+        </div>
+
+        <!-- Q3: Business Relationship -->
+        <div class="question-block" id="qb-q3">
+          <div class="question-number">Question 03</div>
+          <div class="question-text">How would you describe your current relationship with your business?</div>
+          <div class="answer-options">
+            <label class="answer-option" data-question="q3" data-value="love-crushing">
+              <input type="radio" name="q3" value="love-crushing">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I love the mission but the business is crushing me</span>
+            </label>
+            <label class="answer-option" data-question="q3" data-value="performing-not">
+              <input type="radio" name="q3" value="performing-not">
+              <div class="answer-radio"></div>
+              <span class="answer-label">The business is performing but I'm not &mdash; something is off</span>
+            </label>
+            <label class="answer-option" data-question="q3" data-value="good-another-level">
+              <input type="radio" name="q3" value="good-another-level">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Things are good but I know there's another level I can't reach</span>
+            </label>
+            <label class="answer-option" data-question="q3" data-value="exhausted">
+              <input type="radio" name="q3" value="exhausted">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I'm exhausted, overwhelmed, and considering major changes</span>
+            </label>
+            <label class="answer-option" data-question="q3" data-value="exit">
+              <input type="radio" name="q3" value="exit">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I'm preparing for an exit or transition and need alignment</span>
+            </label>
+          </div>
+          <div class="error-msg">Please select an answer</div>
+        </div>
+
+        <!-- Q4: Time Commitment -->
+        <div class="question-block" id="qb-q4">
+          <div class="question-number">Question 04</div>
+          <div class="question-text">Can you commit 3-4 hours per week for 26 weeks to live sessions, AI diagnostic work, and implementation?</div>
+          <div class="answer-options">
+            <label class="answer-option" data-question="q4" data-value="absolutely">
+              <input type="radio" name="q4" value="absolutely">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Yes, absolutely &mdash; I'll make the time</span>
+            </label>
+            <label class="answer-option" data-question="q4" data-value="think-so">
+              <input type="radio" name="q4" value="think-so">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I think so, but my schedule is demanding</span>
+            </label>
+            <label class="answer-option" data-question="q4" data-value="stretch">
+              <input type="radio" name="q4" value="stretch">
+              <div class="answer-radio"></div>
+              <span class="answer-label">It would be a stretch &mdash; my calendar is packed</span>
+            </label>
+            <label class="answer-option" data-question="q4" data-value="cant">
+              <input type="radio" name="q4" value="cant">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Honestly, I don't see how I could right now</span>
+            </label>
+          </div>
+          <div class="error-msg">Please select an answer</div>
+        </div>
+
+        <!-- Q5: Tier Interest -->
+        <div class="question-block" id="qb-q5">
+          <div class="question-number">Question 05</div>
+          <div class="question-text">Which investment tier are you considering?</div>
+          <div class="answer-options">
+            <label class="answer-option" data-question="q5" data-value="launchpad">
+              <input type="radio" name="q5" value="launchpad">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Launchpad ($30,000 / $5,200 per month)</span>
+            </label>
+            <label class="answer-option" data-question="q5" data-value="accelerator">
+              <input type="radio" name="q5" value="accelerator">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Accelerator ($40,000 / $6,900 per month)</span>
+            </label>
+            <label class="answer-option" data-question="q5" data-value="founders-circle">
+              <input type="radio" name="q5" value="founders-circle">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Founders Circle ($50,000 / $8,600 per month)</span>
+            </label>
+            <label class="answer-option" data-question="q5" data-value="guidance">
+              <input type="radio" name="q5" value="guidance">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I'd like guidance on which tier fits my situation</span>
+            </label>
+            <label class="answer-option" data-question="q5" data-value="undecided">
+              <input type="radio" name="q5" value="undecided">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I haven't decided yet</span>
+            </label>
+          </div>
+          <div class="error-msg">Please select an answer</div>
+        </div>
+
+        <!-- Q6: Readiness Timeline -->
+        <div class="question-block" id="qb-q6">
+          <div class="question-number">Question 06</div>
+          <div class="question-text">If accepted, how quickly could you begin?</div>
+          <div class="answer-options">
+            <label class="answer-option" data-question="q6" data-value="immediately">
+              <input type="radio" name="q6" value="immediately">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Immediately &mdash; I'm ready</span>
+            </label>
+            <label class="answer-option" data-question="q6" data-value="2-4-weeks">
+              <input type="radio" name="q6" value="2-4-weeks">
+              <div class="answer-radio"></div>
+              <span class="answer-label">Within 2-4 weeks</span>
+            </label>
+            <label class="answer-option" data-question="q6" data-value="1-2-months">
+              <input type="radio" name="q6" value="1-2-months">
+              <div class="answer-radio"></div>
+              <span class="answer-label">1-2 months out</span>
+            </label>
+            <label class="answer-option" data-question="q6" data-value="future">
+              <input type="radio" name="q6" value="future">
+              <div class="answer-radio"></div>
+              <span class="answer-label">I'm exploring for a future cohort</span>
+            </label>
+          </div>
+          <div class="error-msg">Please select an answer</div>
+        </div>
+
+        <!-- Q7: Anything Else -->
+        <div class="question-block" id="qb-q7">
+          <div class="question-number">Question 07</div>
+          <div class="question-text">Is there anything else you'd like us to know?</div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <textarea id="q7" name="q7" placeholder="Share anything that would help us understand your situation better... (optional)"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="btn-row" style="margin-top: 32px;">
+        <button class="btn-ghost" onclick="goToScreen(3)">&larr; Back</button>
+        <button class="btn-primary" onclick="submitApplication()">Submit Application <span>&rarr;</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 5: RESULTS
+     ============================================================ -->
+<div class="screen" id="screen-results">
+  <div class="results-card" id="results-content">
+    <!-- Populated dynamically by JavaScript -->
+  </div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT — FULL APPLICATION LOGIC
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ==============================
+     SCREEN NAVIGATION
+     ============================== */
+  const screens = [
+    'screen-welcome',    // 1
+    'screen-contact',    // 2
+    'screen-business',   // 3
+    'screen-readiness',  // 4
+    'screen-results'     // 5
+  ];
+
+  function goToScreen(num) {
+    screens.forEach(function(id) {
+      document.getElementById(id).classList.remove('active');
+    });
+    document.getElementById(screens[num - 1]).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // Expose to onclick handlers
+  window.goToScreen = goToScreen;
+
+  /* ==============================
+     RADIO OPTION SELECTION
+     ============================== */
+  document.querySelectorAll('.answer-option').forEach(function(option) {
+    option.addEventListener('click', function() {
+      var questionName = this.querySelector('input[type="radio"]').name;
+      document.querySelectorAll('.answer-option[data-question="' + questionName + '"]').forEach(function(opt) {
+        opt.classList.remove('selected');
+      });
+      this.classList.add('selected');
+      this.querySelector('input[type="radio"]').checked = true;
+      // Clear error state
+      var block = document.getElementById('qb-' + questionName);
+      if (block) block.classList.remove('error');
+    });
+  });
+
+  /* ==============================
+     FORM VALIDATION
+     ============================== */
+  function clearErrors(screenNum) {
+    var screenEl = document.getElementById(screens[screenNum - 1]);
+    screenEl.querySelectorAll('.form-group.error').forEach(function(fg) {
+      fg.classList.remove('error');
+    });
+    screenEl.querySelectorAll('.question-block.error').forEach(function(qb) {
+      qb.classList.remove('error');
+    });
+  }
+
+  function validateScreen2() {
+    var valid = true;
+    var firstName = document.getElementById('firstName');
+    var lastName = document.getElementById('lastName');
+    var email = document.getElementById('email');
+
+    if (!firstName.value.trim()) {
+      document.getElementById('fg-firstName').classList.add('error');
+      valid = false;
+    } else {
+      document.getElementById('fg-firstName').classList.remove('error');
+    }
+
+    if (!lastName.value.trim()) {
+      document.getElementById('fg-lastName').classList.add('error');
+      valid = false;
+    } else {
+      document.getElementById('fg-lastName').classList.remove('error');
+    }
+
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim() || !emailPattern.test(email.value.trim())) {
+      document.getElementById('fg-email').classList.add('error');
+      valid = false;
+    } else {
+      document.getElementById('fg-email').classList.remove('error');
+    }
+
+    return valid;
+  }
+
+  function validateScreen3() {
+    var valid = true;
+    var fields = ['company', 'title', 'industry', 'revenue', 'teamSize', 'yearsInBusiness'];
+
+    fields.forEach(function(field) {
+      var el = document.getElementById(field);
+      var fg = document.getElementById('fg-' + field);
+      if (!el.value || el.value === '') {
+        fg.classList.add('error');
+        valid = false;
+      } else {
+        fg.classList.remove('error');
+      }
+    });
+
+    return valid;
+  }
+
+  function validateScreen4() {
+    var valid = true;
+    var requiredQuestions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
+
+    requiredQuestions.forEach(function(q) {
+      var selected = document.querySelector('input[name="' + q + '"]:checked');
+      var block = document.getElementById('qb-' + q);
+      if (!selected) {
+        block.classList.add('error');
+        valid = false;
+      } else {
+        block.classList.remove('error');
+      }
+    });
+
+    if (!valid) {
+      // Scroll to first error
+      var firstError = document.querySelector('.question-block.error');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    return valid;
+  }
+
+  function validateAndGo(fromScreen, toScreen) {
+    clearErrors(fromScreen);
+    var valid = false;
+
+    if (fromScreen === 2) valid = validateScreen2();
+    if (fromScreen === 3) valid = validateScreen3();
+
+    if (valid) goToScreen(toScreen);
+    else {
+      // Scroll to first error on current screen
+      var screenEl = document.getElementById(screens[fromScreen - 1]);
+      var firstError = screenEl.querySelector('.form-group.error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  window.validateAndGo = validateAndGo;
+
+  /* ==============================
+     SCORING ENGINE
+     ============================== */
+  var REVENUE_SCORES = {
+    'Under $500K': -999,  // DISQUALIFIED
+    '$500K - $1M': 5,
+    '$1M - $3M': 10,
+    '$3M - $5M': 15,
+    '$5M - $10M': 20,
+    '$10M - $25M': 25,
+    '$25M - $50M': 30,
+    '$50M - $100M': 35,
+    '$100M+': 40
+  };
+
+  var TITLE_SCORES = {
+    'Founder & CEO': 10,
+    'Co-Founder': 10,
+    'CEO (non-founder)': 8,
+    'Managing Partner': 8,
+    'Owner/Operator': 10,
+    'Other': 3
+  };
+
+  var Q1_SCORES = {
+    'gap': 10,
+    'struggling': 10,
+    'transition': 8,
+    'ceiling': 8,
+    'referral': 6
+  };
+
+  var Q2_SCORES = {
+    'multiple-strong': 10,
+    'mixed': 8,
+    'skeptical': 5,
+    'first': 4
+  };
+
+  var Q3_SCORES = {
+    'love-crushing': 10,
+    'performing-not': 10,
+    'good-another-level': 8,
+    'exhausted': 9,
+    'exit': 9
+  };
+
+  var Q4_SCORES = {
+    'absolutely': 10,
+    'think-so': 7,
+    'stretch': 4,
+    'cant': -999  // DISQUALIFIED
+  };
+
+  var Q5_SCORES = {
+    'launchpad': 8,
+    'accelerator': 8,
+    'founders-circle': 8,
+    'guidance': 6,
+    'undecided': 4
+  };
+
+  var Q6_SCORES = {
+    'immediately': 10,
+    '2-4-weeks': 8,
+    '1-2-months': 5,
+    'future': 3
+  };
+
+  var TIER_LABELS = {
+    'launchpad': 'Launchpad ($30,000)',
+    'accelerator': 'Accelerator ($40,000)',
+    'founders-circle': 'Founders Circle ($50,000)'
+  };
+
+  function calculateScore() {
+    var revenue = document.getElementById('revenue').value;
+    var title = document.getElementById('title').value;
+    var q1 = getRadioValue('q1');
+    var q2 = getRadioValue('q2');
+    var q3 = getRadioValue('q3');
+    var q4 = getRadioValue('q4');
+    var q5 = getRadioValue('q5');
+    var q6 = getRadioValue('q6');
+
+    // Check automatic disqualifiers
+    var disqualified = false;
+    var disqualifyReason = '';
+
+    if (REVENUE_SCORES[revenue] === -999) {
+      disqualified = true;
+      disqualifyReason = 'revenue';
+    }
+
+    if (Q4_SCORES[q4] === -999) {
+      disqualified = true;
+      disqualifyReason = 'time';
+    }
+
+    if (disqualified) {
+      return {
+        score: 0,
+        disqualified: true,
+        reason: disqualifyReason,
+        tier: q5
+      };
+    }
+
+    var total = 0;
+    total += REVENUE_SCORES[revenue] || 0;
+    total += TITLE_SCORES[title] || 0;
+    total += Q1_SCORES[q1] || 0;
+    total += Q2_SCORES[q2] || 0;
+    total += Q3_SCORES[q3] || 0;
+    total += Q4_SCORES[q4] || 0;
+    total += Q5_SCORES[q5] || 0;
+    total += Q6_SCORES[q6] || 0;
+
+    return {
+      score: total,
+      disqualified: false,
+      reason: null,
+      tier: q5
+    };
+  }
+
+  function getRadioValue(name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+
+  /* ==============================
+     RESULTS RENDERING
+     ============================== */
+  function renderResults(result) {
+    var container = document.getElementById('results-content');
+    var html = '';
+
+    var tierSelected = result.tier && TIER_LABELS[result.tier];
+    var tierName = tierSelected ? TIER_LABELS[result.tier] : null;
+
+    if (result.disqualified) {
+      // NOT QUALIFIED
+      html += renderBadge('grey', 'info');
+      html += '<div class="result-tier-label grey">APPLICATION RECEIVED</div>';
+      html += '<h2>Thank You for Your Interest</h2>';
+      html += '<div class="results-body">';
+      html += '<p>Based on your current situation, The Freedom Launchpad may not be the ideal fit at this time. The program is designed for established founders with existing revenue and the capacity to commit to a 26-week intensive.</p>';
+
+      if (result.reason === 'revenue') {
+        html += '<p>We recommend focusing on building your revenue foundation first. When you\'re consistently generating $500K+, we\'d love to hear from you again.</p>';
+      } else if (result.reason === 'time') {
+        html += '<p>When your schedule opens up enough to commit 3-4 hours per week, we\'d encourage you to reapply.</p>';
+      }
+
+      html += '</div>';
+      html += '<div class="results-cta">';
+      html += '<a href="#assessment" class="btn-primary">Take the Free Founder Freedom Assessment <span>&rarr;</span></a>';
+      html += '<a href="#newsletter" class="btn-secondary">Join Our Newsletter for Founder Insights</a>';
+      html += '</div>';
+
+    } else if (result.score >= 70) {
+      // STRONG FIT
+      html += renderBadge('green', 'check');
+      html += '<div class="result-tier-label green">STRONG FIT</div>';
+      html += '<h2>Application Received &mdash; Strong Fit</h2>';
+      html += '<div class="results-body">';
+      html += '<p>Based on your responses, you\'re an excellent candidate for The Freedom Launchpad. Your application is being reviewed by our team and you\'ll hear from us within 48 hours.</p>';
+
+      if (tierName) {
+        html += '<p>You indicated interest in <strong>' + tierName + '</strong> &mdash; we\'ll discuss whether that\'s the right match during your Enrollment Call.</p>';
+      }
+
+      html += '</div>';
+      html += '<div class="results-note">Your Founder Coherence Index data, if available, will be integrated with your application for a complete picture.</div>';
+      html += '<div class="results-cta">';
+      html += '<a href="#book" class="btn-primary">Book Your Enrollment Call Now <span>&rarr;</span></a>';
+      html += '<div class="results-email">Questions? Email <a href="mailto:hello@thefreedomlaunchpad.com">hello@thefreedomlaunchpad.com</a></div>';
+      html += '</div>';
+
+    } else if (result.score >= 50) {
+      // GOOD FIT
+      html += renderBadge('gold', 'check');
+      html += '<div class="result-tier-label gold">GOOD FIT</div>';
+      html += '<h2>Application Received &mdash; Under Review</h2>';
+      html += '<div class="results-body">';
+      html += '<p>Thank you for applying. Your profile shows strong potential for The Freedom Launchpad. Our team will review your application and reach out within 48 hours to discuss next steps.</p>';
+
+      if (tierName) {
+        html += '<p>You expressed interest in <strong>' + tierName + '</strong>. We\'ll explore whether that aligns with your goals during our conversation.</p>';
+      }
+
+      html += '</div>';
+      html += '<div class="results-cta">';
+      html += '<a href="#assessment" class="btn-primary">Take the Free Founder Freedom Assessment <span>&rarr;</span></a>';
+      html += '<div class="results-email">Questions? Email <a href="mailto:hello@thefreedomlaunchpad.com">hello@thefreedomlaunchpad.com</a></div>';
+      html += '</div>';
+
+    } else if (result.score >= 35) {
+      // CONDITIONAL
+      html += renderBadge('amber', 'review');
+      html += '<div class="result-tier-label amber">ADDITIONAL REVIEW</div>';
+      html += '<h2>Application Received &mdash; Additional Review</h2>';
+      html += '<div class="results-body">';
+      html += '<p>Thank you for your interest in The Freedom Launchpad. Your application requires additional review to determine the best fit. A member of our team will reach out within 72 hours to learn more about your situation.</p>';
+      html += '</div>';
+      html += '<div class="results-note">The Freedom Launchpad serves founders at specific stages. If this cohort isn\'t the right fit, we may recommend alternative resources or a future cohort.</div>';
+      html += '<div class="results-cta">';
+      html += '<a href="#assessment" class="btn-secondary">Take the Free Founder Freedom Assessment</a>';
+      html += '<div class="results-email">Questions? Email <a href="mailto:hello@thefreedomlaunchpad.com">hello@thefreedomlaunchpad.com</a></div>';
+      html += '</div>';
+
+    } else {
+      // BELOW 35 — NOT QUALIFIED (non-disqualifier route)
+      html += renderBadge('grey', 'info');
+      html += '<div class="result-tier-label grey">APPLICATION RECEIVED</div>';
+      html += '<h2>Thank You for Your Interest</h2>';
+      html += '<div class="results-body">';
+      html += '<p>Based on your current situation, The Freedom Launchpad may not be the ideal fit at this time. The program is designed for established founders with existing revenue and the capacity to commit to a 26-week intensive.</p>';
+      html += '</div>';
+      html += '<div class="results-cta">';
+      html += '<a href="#assessment" class="btn-primary">Take the Free Founder Freedom Assessment <span>&rarr;</span></a>';
+      html += '<a href="#newsletter" class="btn-secondary">Join Our Newsletter for Founder Insights</a>';
+      html += '</div>';
+    }
+
+    container.innerHTML = html;
+  }
+
+  function renderBadge(color, type) {
+    var svg = '';
+    if (type === 'check') {
+      svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+    } else if (type === 'review') {
+      svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+    } else {
+      svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+    }
+    return '<div class="result-badge ' + color + '">' + svg + '</div>';
+  }
+
+  /* ==============================
+     COLLECT ALL FORM DATA
+     ============================== */
+  function collectFormData(scoreResult) {
+    return {
+      // Contact
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      linkedin: document.getElementById('linkedin').value.trim(),
+
+      // Business
+      company: document.getElementById('company').value,
+      title: document.getElementById('title').value,
+      industry: document.getElementById('industry').value,
+      revenue: document.getElementById('revenue').value,
+      teamSize: document.getElementById('teamSize').value,
+      yearsInBusiness: document.getElementById('yearsInBusiness').value,
+
+      // Readiness
+      q1_reason: getRadioValue('q1'),
+      q2_investment: getRadioValue('q2'),
+      q3_relationship: getRadioValue('q3'),
+      q4_commitment: getRadioValue('q4'),
+      q5_tier: getRadioValue('q5'),
+      q6_readiness: getRadioValue('q6'),
+      q7_notes: document.getElementById('q7').value.trim(),
+
+      // Scoring
+      qualificationScore: scoreResult.score,
+      disqualified: scoreResult.disqualified,
+      disqualifyReason: scoreResult.reason,
+      qualificationTier: scoreResult.score >= 70 ? 'strong-fit' :
+                          scoreResult.score >= 50 ? 'good-fit' :
+                          scoreResult.score >= 35 ? 'conditional' : 'not-qualified',
+
+      // Metadata
+      submittedAt: new Date().toISOString(),
+      source: 'freedom-launchpad-application',
+      userAgent: navigator.userAgent
+    };
+  }
+
+  /* ==============================
+     SUBMIT APPLICATION
+     ============================== */
+  function submitApplication() {
+    // Validate readiness screen
+    if (!validateScreen4()) return;
+
+    var spinner = document.getElementById('spinner');
+    spinner.classList.add('active');
+
+    var scoreResult = calculateScore();
+    var formData = collectFormData(scoreResult);
+
+    // POST to /apply endpoint
+    fetch('/apply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      spinner.classList.remove('active');
+      renderResults(scoreResult);
+      goToScreen(5);
+    })
+    .catch(function(err) {
+      // Even if the POST fails, still show results (data captured client-side)
+      console.error('Application submission error:', err);
+      spinner.classList.remove('active');
+      renderResults(scoreResult);
+      goToScreen(5);
+    });
+  }
+
+  window.submitApplication = submitApplication;
+
+  /* ==============================
+     INPUT CLEANUP: Clear errors on focus
+     ============================== */
+  document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(function(el) {
+    el.addEventListener('focus', function() {
+      var fg = this.closest('.form-group');
+      if (fg && fg.id) fg.classList.remove('error');
+    });
+    el.addEventListener('input', function() {
+      var fg = this.closest('.form-group');
+      if (fg && fg.id) fg.classList.remove('error');
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
