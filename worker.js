@@ -14,28 +14,36 @@ const CORS_HEADERS = {
 // HELPER: Send email notification via Resend
 // ============================================================
 async function sendNotificationEmail(subject, htmlBody) {
-  try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + RESEND_API_KEY
-      },
-      body: JSON.stringify({
-        from: 'Freedom Launchpad <onboarding@resend.dev>',
-        to: NOTIFY_EMAILS,
-        subject: subject,
-        html: htmlBody
-      })
-    });
-    const result = await res.json();
-    if (!res.ok) {
-      console.error('Resend error:', JSON.stringify(result));
-    }
-    return result;
-  } catch (e) {
-    console.error('Resend send error:', e.message);
-  }
+  // Send to each recipient individually so one failure doesn't block others
+  // (Resend sandbox only allows sending to account owner's email)
+  const results = await Promise.allSettled(
+    NOTIFY_EMAILS.map(async (recipient) => {
+      try {
+        const res = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + RESEND_API_KEY
+          },
+          body: JSON.stringify({
+            from: 'Freedom Launchpad <onboarding@resend.dev>',
+            to: [recipient],
+            subject: subject,
+            html: htmlBody
+          })
+        });
+        const result = await res.json();
+        if (!res.ok) {
+          console.error(`Resend error (${recipient}):`, JSON.stringify(result));
+        }
+        return { recipient, result, ok: res.ok };
+      } catch (e) {
+        console.error(`Resend send error (${recipient}):`, e.message);
+        return { recipient, error: e.message, ok: false };
+      }
+    })
+  );
+  return results;
 }
 
 // ============================================================
