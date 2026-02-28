@@ -10,6 +10,31 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type'
 };
 
+// Stripe tier pricing (amounts in cents)
+const TIER_CONFIG = {
+  launchpad: {
+    name: 'Freedom Launchpad — Launchpad Tier',
+    label: 'Launchpad',
+    fullPrice: 2900000,   // $29,000
+    monthlyPrice: 520000, // $5,200/mo × 6
+    listPrice: 3000000,   // $30,000
+  },
+  accelerator: {
+    name: 'Freedom Launchpad — Accelerator Tier',
+    label: 'Accelerator',
+    fullPrice: 3900000,   // $39,000
+    monthlyPrice: 690000, // $6,900/mo × 6
+    listPrice: 4000000,   // $40,000
+  },
+  'founders-circle': {
+    name: 'Freedom Launchpad — Founders Circle',
+    label: 'Founders Circle',
+    fullPrice: 4900000,   // $49,000
+    monthlyPrice: 850000, // $8,500/mo × 6
+    listPrice: 5000000,   // $50,000
+  },
+};
+
 // ============================================================
 // HELPER: Send email notification via Resend
 // ============================================================
@@ -44,6 +69,73 @@ async function sendNotificationEmail(subject, htmlBody) {
     })
   );
   return results;
+}
+
+// ============================================================
+// HELPER: Create Stripe Checkout Session via REST API
+// ============================================================
+async function createStripeCheckoutSession(stripeKey, { tier, paymentType, email, origin }) {
+  const tierConfig = TIER_CONFIG[tier];
+  if (!tierConfig) throw new Error('Invalid tier');
+
+  const isMonthly = paymentType === 'monthly';
+  const baseUrl = origin || 'https://freedomlaunchpadmastermind.com';
+  const successUrl = `${baseUrl}/enrollment-confirmed?session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = `${baseUrl}/checkout?tier=${tier}`;
+
+  const params = new URLSearchParams();
+  params.append('mode', isMonthly ? 'subscription' : 'payment');
+  params.append('line_items[0][quantity]', '1');
+  params.append('line_items[0][price_data][currency]', 'usd');
+  params.append('line_items[0][price_data][product_data][name]', tierConfig.name);
+  params.append('line_items[0][price_data][product_data][description]', '26-Week Dual-OS Founder Transformation Program');
+
+  if (isMonthly) {
+    params.append('line_items[0][price_data][unit_amount]', tierConfig.monthlyPrice.toString());
+    params.append('line_items[0][price_data][recurring][interval]', 'month');
+    // Metadata to track this is a 6-payment installment plan
+    params.append('subscription_data[metadata][tier]', tier);
+    params.append('subscription_data[metadata][installments]', '6');
+    params.append('subscription_data[metadata][program]', 'Freedom Launchpad');
+  } else {
+    params.append('line_items[0][price_data][unit_amount]', tierConfig.fullPrice.toString());
+  }
+
+  if (email) {
+    params.append('customer_email', email);
+  }
+
+  params.append('success_url', successUrl);
+  params.append('cancel_url', cancelUrl);
+  params.append('metadata[tier]', tier);
+  params.append('metadata[payment_type]', paymentType);
+  params.append('metadata[program]', 'Freedom Launchpad');
+
+  // Allow promo codes
+  params.append('allow_promotion_codes', 'true');
+
+  const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${stripeKey}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: params.toString(),
+  });
+
+  return { response: res, data: await res.json() };
+}
+
+// ============================================================
+// HELPER: Retrieve Stripe Checkout Session details
+// ============================================================
+async function getStripeSession(stripeKey, sessionId) {
+  const res = await fetch(`https://api.stripe.com/v1/checkout/sessions/${sessionId}`, {
+    headers: {
+      'Authorization': `Bearer ${stripeKey}`,
+    },
+  });
+  return await res.json();
 }
 
 // ============================================================
@@ -226,6 +318,100 @@ function buildApplicationEmail(data) {
     </div>`;
 }
 
+function buildCheckoutStartedEmail({ email, tier, paymentType, amount }) {
+  return `
+    <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
+      <div style="background: #1A2744; padding: 20px 24px; border-radius: 8px 8px 0 0;">
+        <h2 style="color: #C9943E; margin: 0; font-size: 18px;">Checkout Initiated</h2>
+        <p style="color: rgba(255,255,255,0.7); margin: 4px 0 0; font-size: 13px;">Someone has started the payment process</p>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #E2E8F0; border-top: none; padding: 24px; border-radius: 0 0 8px 8px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px; width: 120px;">Email</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 14px; font-weight: 600;">${email || 'Not provided'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Tier</td>
+            <td style="padding: 8px 0; color: #C9943E; font-size: 14px; font-weight: 600;">${tier}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Payment</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 14px;">${paymentType === 'full' ? 'Pay in Full' : '6-Month Plan'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Amount</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 16px; font-weight: 700;">${amount}</td>
+          </tr>
+        </table>
+        <div style="margin-top: 16px; padding: 12px; background: #FFF8EE; border-radius: 6px; font-size: 12px; color: #92400E;">
+          This person has <strong>initiated checkout</strong> but may not have completed payment yet. Watch for the Stripe payment confirmation.
+        </div>
+      </div>
+    </div>`;
+}
+
+function buildPaymentConfirmedEmail({ sessionId, email, name, tier, amount, paymentType }) {
+  return `
+    <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
+      <div style="background: #1A2744; padding: 20px 24px; border-radius: 8px 8px 0 0;">
+        <h2 style="color: #2D9C6F; margin: 0; font-size: 18px;">PAYMENT CONFIRMED</h2>
+        <p style="color: rgba(255,255,255,0.7); margin: 4px 0 0; font-size: 13px;">A new enrollment has been completed!</p>
+      </div>
+      <div style="background: #ffffff; border: 1px solid #E2E8F0; border-top: none; padding: 24px; border-radius: 0 0 8px 8px;">
+        <div style="background: #F0FDF4; border-left: 4px solid #2D9C6F; padding: 16px; border-radius: 4px; margin-bottom: 20px;">
+          <p style="color: #166534; font-size: 16px; font-weight: 700; margin: 0;">ENROLLMENT PAYMENT RECEIVED</p>
+          <p style="color: #4A5568; font-size: 13px; margin: 8px 0 0;">A founder has completed their Freedom Launchpad payment.</p>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px; width: 140px;">Customer</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 14px; font-weight: 600;">${name || 'See Stripe Dashboard'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Email</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 14px; font-weight: 600;">${email ? `<a href="mailto:${email}" style="color: #1A2744;">${email}</a>` : 'See Stripe Dashboard'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Tier</td>
+            <td style="padding: 8px 0; color: #C9943E; font-size: 14px; font-weight: 600;">${tier || 'See Stripe Dashboard'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Payment Type</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 14px;">${paymentType === 'monthly' ? '6-Month Plan' : paymentType === 'full' ? 'Pay in Full' : 'See Stripe Dashboard'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Amount</td>
+            <td style="padding: 8px 0; color: #2D9C6F; font-size: 18px; font-weight: 700;">${amount || 'See Stripe Dashboard'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Time</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 14px;">${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #8896A6; font-size: 13px;">Session ID</td>
+            <td style="padding: 8px 0; color: #1A2744; font-size: 11px; font-family: monospace;">${sessionId || 'N/A'}</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 20px; padding: 16px; background: #1A2744; border-radius: 8px;">
+          <p style="color: #C9943E; font-size: 13px; font-weight: 600; margin: 0 0 8px;">ACTION REQUIRED</p>
+          <ul style="color: rgba(255,255,255,0.85); font-size: 13px; margin: 0; padding-left: 16px; line-height: 1.8;">
+            <li>Send onboarding welcome email within 24 hours</li>
+            <li>Schedule onboarding call with the new member</li>
+            <li>Add to Slack community and AI agent access</li>
+            <li>Ship Freedom Binder (if applicable tier)</li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 16px; text-align: center;">
+          <a href="https://dashboard.stripe.com/payments" style="display: inline-block; background: #C9943E; color: #fff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600;">View in Stripe Dashboard</a>
+        </div>
+      </div>
+    </div>`;
+}
+
 // ============================================================
 // MAIN WORKER
 // ============================================================
@@ -338,6 +524,136 @@ export default {
           ok: false,
           error: 'Failed to process application'
         }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+        });
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // POST /create-checkout-session — Stripe payment
+    // ─────────────────────────────────────────────
+    if (request.method === 'POST' && url.pathname === '/create-checkout-session') {
+      try {
+        const body = await request.json();
+        const { tier, paymentType, email, origin } = body;
+        const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
+
+        if (!STRIPE_SECRET_KEY) {
+          return new Response(JSON.stringify({
+            ok: false,
+            error: 'Payment processing is not yet configured. Please contact us to complete enrollment.'
+          }), {
+            status: 503,
+            headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+          });
+        }
+
+        const tierConfig = TIER_CONFIG[tier];
+        if (!tierConfig) {
+          return new Response(JSON.stringify({ ok: false, error: 'Invalid tier selected.' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+          });
+        }
+
+        // Create Stripe Checkout Session
+        const { response: stripeRes, data: session } = await createStripeCheckoutSession(
+          STRIPE_SECRET_KEY,
+          { tier, paymentType, email, origin }
+        );
+
+        if (!stripeRes.ok) {
+          console.error('Stripe error:', JSON.stringify(session));
+          return new Response(JSON.stringify({
+            ok: false,
+            error: 'Unable to create checkout session. Please try again.'
+          }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+          });
+        }
+
+        console.log('CHECKOUT_CREATED', JSON.stringify({
+          tier, paymentType, email, sessionId: session.id
+        }));
+
+        // Fire-and-forget: Notify team about checkout initiation
+        const isMonthly = paymentType === 'monthly';
+        const amount = isMonthly
+          ? `$${(tierConfig.monthlyPrice / 100).toLocaleString()}/mo x 6`
+          : `$${(tierConfig.fullPrice / 100).toLocaleString()}`;
+
+        sendNotificationEmail(
+          `💰 Checkout Started: ${email || 'Unknown'} — ${tierConfig.label} (${amount})`,
+          buildCheckoutStartedEmail({ email, tier: tierConfig.label, paymentType, amount })
+        ).catch(() => {});
+
+        return new Response(JSON.stringify({ ok: true, url: session.url }), {
+          headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+        });
+      } catch (e) {
+        console.error('Create checkout session error:', e.message);
+        return new Response(JSON.stringify({
+          ok: false,
+          error: 'Failed to process request.'
+        }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+        });
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // POST /payment-confirmed — Payment success notification
+    // Called from the enrollment-confirmed page
+    // ─────────────────────────────────────────────
+    if (request.method === 'POST' && url.pathname === '/payment-confirmed') {
+      try {
+        const { sessionId } = await request.json();
+        const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
+
+        let email = null, name = null, tier = null, amount = null, paymentType = null;
+
+        // Retrieve session details from Stripe for the notification email
+        if (STRIPE_SECRET_KEY && sessionId) {
+          try {
+            const session = await getStripeSession(STRIPE_SECRET_KEY, sessionId);
+            email = session.customer_email || session.customer_details?.email;
+            name = session.customer_details?.name;
+            tier = session.metadata?.tier;
+            paymentType = session.metadata?.payment_type;
+
+            if (tier && TIER_CONFIG[tier]) {
+              const tc = TIER_CONFIG[tier];
+              amount = paymentType === 'monthly'
+                ? `$${(tc.monthlyPrice / 100).toLocaleString()}/mo x 6`
+                : `$${(tc.fullPrice / 100).toLocaleString()}`;
+            } else if (session.amount_total) {
+              amount = `$${(session.amount_total / 100).toLocaleString()}`;
+            }
+          } catch (e) {
+            console.error('Stripe session retrieval error:', e.message);
+          }
+        }
+
+        const tierLabel = tier && TIER_CONFIG[tier] ? TIER_CONFIG[tier].label : tier;
+
+        console.log('PAYMENT_CONFIRMED', JSON.stringify({
+          sessionId, email, name, tier: tierLabel, amount
+        }));
+
+        await sendNotificationEmail(
+          `✅ PAYMENT RECEIVED: ${name || email || 'New Member'} — ${tierLabel || 'Freedom Launchpad'} (${amount || 'See Stripe'})`,
+          buildPaymentConfirmedEmail({ sessionId, email, name, tier: tierLabel, amount, paymentType })
+        );
+
+        return new Response(JSON.stringify({ ok: true }), {
+          headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
+        });
+      } catch (e) {
+        console.error('Payment confirmed error:', e.message);
+        return new Response(JSON.stringify({ ok: false }), {
           status: 500,
           headers: { 'Content-Type': 'application/json', ...CORS_HEADERS }
         });
